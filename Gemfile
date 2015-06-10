@@ -2,6 +2,8 @@
 # the following line to use "http://" instead
 source 'https://rubygems.org'
 
+gem 'rake'
+
 gem "middleman", "~>3.3.12"
 
 gem 'middleman-gh-pages'
