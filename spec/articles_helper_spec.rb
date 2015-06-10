@@ -1,4 +1,5 @@
 require 'articles_helper'
+require 'github/markup'
 
 class ArticlesHelperWrapper
   include ArticlesHelper
@@ -9,29 +10,26 @@ describe ArticlesHelperWrapper do
     expect(ArticlesHelper::ARTICLES_DIRECTORY).not_to be_nil
   end
 
+  it "knows where the articles should go" do
+    expect(ArticlesHelper::RENDERED_ARTICLES_DIRECTORY).not_to be_nil
+  end
+
   context "when creating and destroying articles" do
 
-    before do
-      @manifest = random_hash
-    end
-
     after do
-      destroy_test_article!(@manifest)
+      destroy_test_article!
     end
 
     it "fetches the right list of articles" do
       initial_count = subject.articles.count
-      create_test_article!(@manifest)
+      create_test_article!
       expect(subject.articles.count).to eq initial_count + 1
     end
 
-    it "parses article data correctly" do
-      create_test_article!(@manifest)
-      parsed_article = subject.parse_article(File.read("#{ArticlesHelper::ARTICLES_DIRECTORY}/test_#{@manifest}.md"))
+    it "parses article markup correctly" do
+      create_test_article!
+      parsed_article = subject.parse_article(subject.articles.last)
       expect(parsed_article).to eq test_article_html
-    end
-
-    xit "displays an article correctly" do
     end
 
   end
@@ -42,8 +40,8 @@ describe ArticlesHelperWrapper do
     (0...8).map { (65 + rand(26)).chr }.join
   end
 
-  def create_test_article!(manifest)
-    File.open("#{ArticlesHelper::ARTICLES_DIRECTORY}/test_#{manifest}.md", "w") do | f |
+  def create_test_article!
+    File.open("#{ArticlesHelper::ARTICLES_DIRECTORY}/test_article.md", "w") do | f |
       f.write(test_article_text)
     end
   end
@@ -53,10 +51,10 @@ describe ArticlesHelperWrapper do
   end
 
   def test_article_html
-    "<h1>Test article</h1><p>This article should be deleted.</p>"
+    "<h1>Test article</h1>\n\n<p>This article should be deleted.</p>\n"
   end
 
-  def destroy_test_article!(manifest)
-    File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/test_#{manifest}.md")
+  def destroy_test_article!
+    File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/test_article.md")
   end
 end

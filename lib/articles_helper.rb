@@ -1,6 +1,8 @@
 # Picks articles for rendering
+require 'github/markup'
 module ArticlesHelper
   ARTICLES_DIRECTORY = "source/posts"
+  RENDERED_ARTICLES_DIRECTORY = "source/rendered_posts"
 
   def articles
     article_paths = fetch_article_paths
@@ -8,7 +10,7 @@ module ArticlesHelper
   end
 
   def parse_article article
-    p article
+    GitHub::Markup.render(article[:title], article[:file])
   end
 
   private
@@ -20,11 +22,15 @@ module ArticlesHelper
   def convert_paths_to_articles(paths)
     strip_directories!(paths)
     paths.map do | path |
-      File.open(ARTICLES_DIRECTORY + "/#{path}").read
+      {
+        title: path,
+        file: File.open(ARTICLES_DIRECTORY + "/#{path}").read
+      }
     end
   end
 
   def strip_directories!(paths)
+    paths.delete_if{ | path | path[0] == "." }
     paths.delete_if { | path | [".", ".."].include? path }
   end
 
