@@ -10,9 +10,11 @@ module ArticlesHelper
   end
 
   def parse_article(article)
+    body = GitHub::Markup.render(article[:filename], article[:body])
     {
-      title: "Hello!",
-      body: GitHub::Markup.render(article[:title], article[:file])
+      title: extract_title(body),
+      body: remove_title!(body),
+      excerpt: excerpt_article(body)
     }
   end
 
@@ -30,8 +32,8 @@ module ArticlesHelper
     strip_directories!(paths)
     paths.map do | path |
       {
-        title: path,
-        file: File.open(ARTICLES_DIRECTORY + "/#{path}").read
+        filename: path,
+        body: File.open(ARTICLES_DIRECTORY + "/#{path}").read
       }
     end
   end
@@ -40,5 +42,24 @@ module ArticlesHelper
     paths.delete_if{ | path | path[0] == "." }
     paths.delete_if { | path | [".", ".."].include? path }
   end
+
+  # --- TODO - make these a separate class ---
+  def extract_title(article_content)
+    # Matches the 1-index of the MatchData object, which is
+    # the title
+    article_content.match('<h1>([^<>]*)</h1>')[1]
+  end
+
+  def remove_title!(article_content)
+    # We want to remove the whole thing, so slice the 0-index
+    # of the MatchData object
+    article_content.slice!(article_content.match('<h1>([^<>]*)</h1>')[0])
+    article_content
+  end
+
+  def excerpt_article(article_content)
+    "#{article_content[0..50]}..."
+  end
+  # --- END separate class ---
 
 end
