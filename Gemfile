@@ -6,7 +6,7 @@ gem 'rake'
 
 gem "middleman", "~>3.3.12"
 
-gem 'middleman-gh-pages'
+gem "middleman-deploy"
 
 'github/markup'
 

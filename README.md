@@ -1,4 +1,4 @@
-2015 Blog
+Blog
 ==
 
 A minimal blog for 2015.
