@@ -1,0 +1,7 @@
+<ol class="articles-list">
+  <% articles.each do | article | %>
+  <li class="list-item articles-list__list-item">
+    <%= partial :"_articles-list", locals: article %>
+  </li>
+  <% end %>
+</ol>

@@ -63,6 +63,8 @@ set :images_dir, 'images'
 
 set :posts_dir, 'posts'
 
+set :partials_dir, 'components'
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment

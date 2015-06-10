@@ -2,5 +2,13 @@
 title: My Blog
 ---
 
-<%= partial :"components/head-block", locals: {title: "My Blog"} %>
+<%= partial :"_head-block", locals: { 
+  title: "My Blog"
+} %>
+
+<%= partial :"_articles-list", locals: { 
+  articles: @articles 
+} %>
+
+<%= partial :"_footer", locals: {} %>
 
