@@ -6,9 +6,7 @@ title: My Blog
   title: "My Blog"
 } %>
 
-<%= partial :"_articles-list", locals: { 
-  articles: @articles 
-} %>
+<%= partial :"_posts-list", locals: { posts: parsed_articles } %>
 
 <%= partial :"_footer", locals: {} %>
 

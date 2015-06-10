@@ -9,8 +9,15 @@ module ArticlesHelper
     articles = convert_paths_to_articles(article_paths)
   end
 
-  def parse_article article
-    GitHub::Markup.render(article[:title], article[:file])
+  def parse_article(article)
+    {
+      title: "Hello!",
+      body: GitHub::Markup.render(article[:title], article[:file])
+    }
+  end
+
+  def parsed_articles
+    articles.map { | article | parse_article(article) }
   end
 
   private

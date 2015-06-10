@@ -29,7 +29,18 @@ describe ArticlesHelperWrapper do
     it "parses article markup correctly" do
       create_test_article!
       parsed_article = subject.parse_article(subject.articles.last)
-      expect(parsed_article).to eq test_article_html
+      expect(parsed_article[:body]).to eq test_article_html
+    end
+
+    it "supplies a list of rendered articles" do
+      create_test_article!
+      last_article = subject.articles.last
+      expect(subject.parsed_articles.last).to eq subject.parse_article(last_article)
+    end
+
+    it "extracts titles correctly" do
+      create_test_article!
+      expect(subject.parsed_articles.last[:title]).to eq "Test article"
     end
 
   end
@@ -41,7 +52,7 @@ describe ArticlesHelperWrapper do
   end
 
   def create_test_article!
-    File.open("#{ArticlesHelper::ARTICLES_DIRECTORY}/test_article.md", "w") do | f |
+    File.open("#{ArticlesHelper::ARTICLES_DIRECTORY}/zzz_test_article.md", "w") do | f |
       f.write(test_article_text)
     end
   end
@@ -55,6 +66,6 @@ describe ArticlesHelperWrapper do
   end
 
   def destroy_test_article!
-    File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/test_article.md")
+    File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/zzz_test_article.md")
   end
 end
