@@ -14,13 +14,18 @@ describe ArticlesHelperWrapper do
     expect(ArticlesHelper::RENDERED_ARTICLES_DIRECTORY).not_to be_nil
   end
 
-  context "when creating and destroying articles" do
+  context "a new article is created" do
 
     after do
       destroy_test_article!
     end
 
-    it "fetches the right list of articles" do
+    it "lists articles" do
+      create_test_article!
+      expect(subject.articles).not_to be_empty
+    end
+
+    it "increments the list of articles" do
       initial_count = subject.articles.count
       create_test_article!
       expect(subject.articles.count).to eq initial_count + 1
