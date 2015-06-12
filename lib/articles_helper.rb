@@ -12,6 +12,7 @@ module ArticlesHelper
   def parse_article(article)
     body = GitHub::Markup.render(article[:filename], article[:body])
     {
+      id: article[:id],
       title: extract_title(body),
       body: remove_title!(body),
       excerpt: excerpt_article(body)
@@ -32,6 +33,7 @@ module ArticlesHelper
     strip_directories!(paths)
     paths.map do | path |
       {
+        id: assign_id(path),
         filename: path,
         body: File.open("#{ARTICLES_DIRECTORY}/#{path}").read
       }
@@ -61,5 +63,12 @@ module ArticlesHelper
     "#{article_content[0..50]}..."
   end
   # --- END separate class ---
+
+  def assign_id(filename)
+    article_paths = strip_directories!(fetch_article_paths)
+    article_paths.sort!
+
+    article_paths.index(filename) + 1
+  end
 
 end

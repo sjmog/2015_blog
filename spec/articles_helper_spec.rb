@@ -31,6 +31,11 @@ describe ArticlesHelperWrapper do
       expect(subject.articles.count).to eq initial_count + 1
     end
 
+    it "generates an id for that article" do
+      create_test_article!
+      expect(subject.articles.last[:id]).not_to be_nil
+    end
+
     it "parses article markup and removes the title correctly" do
       create_test_article!
       parsed_article = subject.parse_article(subject.articles.last)
