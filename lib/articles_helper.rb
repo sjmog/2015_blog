@@ -39,7 +39,7 @@ module ArticlesHelper
   end
 
   def strip_directories!(paths)
-    paths.delete_if{ | path | path[0] == "." }
+    paths.delete_if { | path | path[0] == "." }
     paths.delete_if { | path | [".", ".."].include? path }
   end
 
