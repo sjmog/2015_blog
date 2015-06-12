@@ -26,10 +26,10 @@ describe ArticlesHelperWrapper do
       expect(subject.articles.count).to eq initial_count + 1
     end
 
-    it "parses article markup correctly" do
+    it "parses article markup and removes the title correctly" do
       create_test_article!
       parsed_article = subject.parse_article(subject.articles.last)
-      expect(parsed_article[:body]).to eq test_article_html
+      expect(parsed_article[:body]).to eq test_article_html_without_title
     end
 
     it "supplies a list of rendered articles" do
@@ -63,6 +63,10 @@ describe ArticlesHelperWrapper do
 
   def test_article_html
     "<h1>Test article</h1>\n\n<p>This article should be deleted.</p>\n"
+  end
+
+  def test_article_html_without_title
+    "\n\n<p>This article should be deleted.</p>\n"
   end
 
   def destroy_test_article!

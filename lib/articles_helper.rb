@@ -33,7 +33,7 @@ module ArticlesHelper
     paths.map do | path |
       {
         filename: path,
-        body: File.open(ARTICLES_DIRECTORY + "/#{path}").read
+        body: File.open("#{ARTICLES_DIRECTORY}/#{path}").read
       }
     end
   end
