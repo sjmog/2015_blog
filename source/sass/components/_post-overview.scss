@@ -31,7 +31,12 @@
     width: $base-font-size + px;
     height: 1px;
     background-color: darken($bg, 10%);
-    top: ms-modify($base-font-size, 1) + px;
+    top: ms-modify($base-font-size, 1.5) + px;
     left: -1 * ms-modify($base-font-size, 3) + px;
   }
+}
+
+.post-overview__body, .post-overview__body + * {
+  font-size: ms-modify($base-font-size, 1.3) + px;
+  color: lighten($body-font-color, 10%);
 }

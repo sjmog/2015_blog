@@ -96,48 +96,70 @@ body {
 
 /* TYPOGRAPHY */
 /* line 3, ../sass/_typography.scss */
-p {
-  font-size: 16.78873px;
+p, ul, ol, li {
+  font-size: 18.48475px;
+  color: #5e5e5e;
 }
 
-/* line 7, ../sass/_typography.scss */
+/* line 8, ../sass/_typography.scss */
 small {
   font-size: 14.53196px;
   color: #777777;
 }
 
-/* line 12, ../sass/_typography.scss */
+/* line 13, ../sass/_typography.scss */
 h1 {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 41.88678px;
+  font-size: 28.50324px;
+  color: #919191;
+  /* the after-title underline */
+}
+/* line 20, ../sass/_typography.scss */
+h1:before {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  bottom: -11.15286px;
+  background-color: #e1e1e1;
+}
+
+/* line 32, ../sass/_typography.scss */
+h2 {
   font-size: 25.888px;
 }
 
-/* line 16, ../sass/_typography.scss */
-h2 {
-  font-size: 20.3521px;
-}
-
-/* line 20, ../sass/_typography.scss */
+/* line 35, ../sass/_typography.scss */
 h3 {
-  font-size: 17.61634px;
+  font-size: 23.51272px;
 }
 
-/* line 24, ../sass/_typography.scss */
+/* line 38, ../sass/_typography.scss */
+h4 {
+  font-size: 21.35537px;
+}
+
+/* line 42, ../sass/_typography.scss */
 a {
   color: #919191;
   text-decoration: none;
 }
-/* line 27, ../sass/_typography.scss */
+/* line 45, ../sass/_typography.scss */
 a:hover {
   color: #6a6a6a;
 }
 
 /* long form */
-/* line 34, ../sass/_typography.scss */
+/* line 52, ../sass/_typography.scss */
 .posts h1, .posts h2, .posts h3, .posts h4, .posts h5, .posts h6 {
   margin-bottom: 12.57855px;
   color: #919191;
 }
-/* line 38, ../sass/_typography.scss */
+/* line 56, ../sass/_typography.scss */
 .posts h1 {
   display: inline-block;
   position: relative;
@@ -145,7 +167,7 @@ a:hover {
   font-size: 28.50324px;
   /* the after-title underline */
 }
-/* line 44, ../sass/_typography.scss */
+/* line 62, ../sass/_typography.scss */
 .posts h1:before {
   content: "";
   position: absolute;
@@ -156,38 +178,35 @@ a:hover {
   bottom: -11.15286px;
   background-color: #e1e1e1;
 }
-/* line 55, ../sass/_typography.scss */
+/* line 73, ../sass/_typography.scss */
 .posts h2 {
   font-size: 25.888px;
 }
-/* line 58, ../sass/_typography.scss */
+/* line 76, ../sass/_typography.scss */
 .posts h3 {
   font-size: 23.51272px;
 }
-/* line 61, ../sass/_typography.scss */
+/* line 79, ../sass/_typography.scss */
 .posts h4 {
   font-size: 21.35537px;
 }
-/* line 64, ../sass/_typography.scss */
+/* line 82, ../sass/_typography.scss */
 .posts p, .posts ul, .posts ol {
   margin-bottom: 25.888px;
-  font-size: 18.48475px;
-  color: #5e5e5e;
   line-height: 1.8;
 }
-/* line 70, ../sass/_typography.scss */
+/* line 86, ../sass/_typography.scss */
 .posts ul, .posts ol {
   padding-left: 41.88678px;
 }
-/* line 73, ../sass/_typography.scss */
+/* line 89, ../sass/_typography.scss */
 .posts li {
   position: relative;
   margin-bottom: 16px;
-  font-size: 18.48475px;
   color: #5e5e5e;
   line-height: 1.8;
 }
-/* line 79, ../sass/_typography.scss */
+/* line 94, ../sass/_typography.scss */
 .posts li:before {
   content: "";
   position: absolute;
@@ -200,11 +219,6 @@ a:hover {
 
 /* Head block */
 /* Displays the blog header */
-/* line 4, ../sass/components/_head-block.scss */
-.head-block {
-  padding-bottom: 25.888px;
-}
-
 /* Posts list */
 /* Displays posts in a list */
 /* Post overview */
@@ -245,8 +259,14 @@ a:hover {
   width: 16px;
   height: 1px;
   background-color: #e1e1e1;
-  top: 16px;
+  top: 20.3521px;
   left: -41.88678px;
+}
+
+/* line 39, ../sass/components/_post-overview.scss */
+.post-overview__body, .post-overview__body + * {
+  font-size: 18.48475px;
+  color: #5e5e5e;
 }
 
 /* Post body */
