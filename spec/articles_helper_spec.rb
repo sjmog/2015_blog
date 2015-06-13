@@ -35,6 +35,11 @@ describe ArticlesHelperWrapper do
       expect(subject.articles.last[:id]).not_to be_nil
     end
 
+    it "generates a file_title for the article" do
+      create_test_article!
+      expect(subject.articles.last[:file_title]).to eq 'zzz_test_article'
+    end
+
     it "parses article markup and removes the title correctly" do
       create_test_article!
       parsed_article = subject.parse_article(subject.articles.last)

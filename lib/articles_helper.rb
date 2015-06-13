@@ -13,6 +13,7 @@ module ArticlesHelper
     body = GitHub::Markup.render(article[:filename], article[:body])
     {
       id: article[:id],
+      file_title: article[:file_title],
       title: extract_title(body),
       body: remove_title!(body),
       excerpt: excerpt_article(body)
@@ -39,6 +40,7 @@ module ArticlesHelper
     paths.map do | path |
       {
         id: assign_id(path),
+        file_title: remove_filetype(path),
         filename: path,
         body: File.open("#{ARTICLES_DIRECTORY}/#{path}").read
       }
@@ -74,6 +76,10 @@ module ArticlesHelper
     article_paths.sort!
 
     article_paths.index(filename) + 1
+  end
+
+  def remove_filetype(filename)
+    File.basename(filename, File.extname(filename))
   end
 
 end
