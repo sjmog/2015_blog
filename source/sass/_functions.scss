@@ -1,0 +1,28 @@
+/* --- Utility functions --- */
+@function power($number, $exp) {
+  $value: 1;
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
+    }
+  }
+  @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+
+@function ms($incr) {
+  @if $incr == 0 {
+    @return 1;
+  }
+  @return power(1.618, $incr);
+}
+
+/* --- Layout --- */
+
+@function ms-modify($size, $incr) {
+  @return $size * pow(1.618, $incr - 1);
+}

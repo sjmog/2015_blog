@@ -67,7 +67,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
+/* --- Utility functions --- */
+/* --- Layout --- */
 /* COLORS */
+/* TYPOGRAPHY */
 /* BASE STYLES */
 /* line 3, ../sass/_base.scss */
 body {
@@ -75,4 +78,25 @@ body {
   padding-left: 16%;
   padding-top: 14%;
   font-family: "freight-text-pro", Georgia;
+}
+
+/* TYPOGRAPHY */
+/* line 3, ../sass/_typography.scss */
+p {
+  font-size: 16.78873px;
+}
+
+/* line 7, ../sass/_typography.scss */
+h1 {
+  font-size: 25.888px;
+}
+
+/* line 11, ../sass/_typography.scss */
+h2 {
+  font-size: 20.3521px;
+}
+
+/* line 15, ../sass/_typography.scss */
+h3 {
+  font-size: 17.61634px;
 }

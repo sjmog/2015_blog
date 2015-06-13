@@ -1,0 +1,17 @@
+/* TYPOGRAPHY */
+
+p {
+  font-size: ms-modify($base-font-size, 1.1) + px;
+}
+
+h1 {
+  font-size: ms-modify($base-font-size, 2) + px;
+}
+
+h2 {
+  font-size: ms-modify($base-font-size, 1.5) + px;
+}
+
+h3 {
+  font-size: ms-modify($base-font-size, 1.2) + px;
+}
