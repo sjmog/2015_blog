@@ -23,6 +23,11 @@ module ArticlesHelper
     articles.map { | article | parse_article(article) }
   end
 
+  # TODO: make into a separate class
+  def fetch_article(id)
+    parsed_articles.find { | article | article[:id] == id }
+  end
+
   private
 
   def fetch_article_paths

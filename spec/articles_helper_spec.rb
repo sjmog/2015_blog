@@ -15,7 +15,6 @@ describe ArticlesHelperWrapper do
   end
 
   context "a new article is created" do
-
     after do
       destroy_test_article!
     end
@@ -52,7 +51,14 @@ describe ArticlesHelperWrapper do
       create_test_article!
       expect(subject.parsed_articles.last[:title]).to eq "Test article"
     end
+  end
 
+  context "viewing an article" do
+    it "fetches an article given an id" do
+      create_alternate_test_article!
+      expect(subject.fetch_article(1)[:title]).to eq "Test article"
+      destroy_alternate_test_article!
+    end
   end
 
   private
@@ -67,6 +73,20 @@ describe ArticlesHelperWrapper do
     end
   end
 
+  def destroy_test_article!
+    File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/zzz_test_article.md")
+  end
+
+  def create_alternate_test_article!
+    File.open("#{ArticlesHelper::ARTICLES_DIRECTORY}/aaa_test_article.md", "w") do | f |
+      f.write(test_article_text)
+    end
+  end
+
+  def destroy_alternate_test_article!
+    File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/aaa_test_article.md")
+  end
+
   def test_article_text
     "#Test article\nThis article should be deleted."
   end
@@ -77,9 +97,5 @@ describe ArticlesHelperWrapper do
 
   def test_article_html_without_title
     "\n\n<p>This article should be deleted.</p>\n"
-  end
-
-  def destroy_test_article!
-    File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/zzz_test_article.md")
   end
 end
