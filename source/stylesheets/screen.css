@@ -78,6 +78,9 @@ body {
   padding-left: 16%;
   padding-top: 14%;
   font-family: "freight-text-pro", Georgia;
+  font-size: 16.78873px;
+  line-height: 1.5;
+  color: #444;
 }
 
 /* TYPOGRAPHY */
@@ -100,3 +103,22 @@ h2 {
 h3 {
   font-size: 17.61634px;
 }
+
+/* line 19, ../sass/_typography.scss */
+a {
+  color: #919191;
+  text-decoration: none;
+}
+/* line 22, ../sass/_typography.scss */
+a:hover {
+  color: #6a6a6a;
+}
+
+/* Head block */
+/* Displays the blog header */
+/* Posts list */
+/* Displays posts in a list */
+/* Post overview */
+/* Displays an overview of the post */
+/* Post body */
+/* Displays the body copy for the post */

@@ -6,4 +6,7 @@ body {
   padding-top: 14%;
 
   font-family: "freight-text-pro", Georgia;
+  font-size: ms-modify($base-font-size, 1.1) + px;
+  line-height: 1.5;
+  color: $body-font-color;
 }
