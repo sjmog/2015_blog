@@ -65,7 +65,7 @@ module ArticlesHelper
   end
 
   def excerpt_article(article_content)
-    "#{article_content[0..50]}..."
+    "#{article_content[0..120]}..."
   end
   # --- END separate class ---
 

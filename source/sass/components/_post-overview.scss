@@ -1,2 +1,37 @@
 /* Post overview */
 /* Displays an overview of the post */
+
+.post-overview {
+  padding-bottom: ms-modify($base-font-size, 1.5) + px;
+}
+
+.post-overview__title {
+  position: relative;
+  /* margin overlaps with anchor's padding below */
+  margin-bottom: ms-modify($base-font-size, 0.5) + px;
+  a {
+    position: relative;
+    padding-bottom: ms-modify($base-font-size, 0.5) + px;
+    /* the after-title underline */
+    &:before {
+      content: "";
+      position: absolute;
+      display: block;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      bottom: ms-modify($base-font-size, 0.25) + px;
+      background-color: darken($bg, 10%);
+    }
+  }
+  /* The before-title whisker */
+  &:before {
+    content: "";
+    position: absolute;
+    width: $base-font-size + px;
+    height: 1px;
+    background-color: darken($bg, 10%);
+    top: 53%;
+    left: -1 * ms-modify($base-font-size, 3) + px;
+  }
+}

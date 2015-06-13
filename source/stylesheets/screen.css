@@ -90,35 +90,94 @@ p {
 }
 
 /* line 7, ../sass/_typography.scss */
+.posts p {
+  font-size: 18.48475px;
+  color: #5e5e5e;
+  line-height: 1.8;
+}
+
+/* line 13, ../sass/_typography.scss */
 h1 {
   font-size: 25.888px;
 }
 
-/* line 11, ../sass/_typography.scss */
+/* line 17, ../sass/_typography.scss */
+.posts h1 {
+  font-size: 28.50324px;
+  margin-bottom: 12.57855px;
+  color: #919191;
+}
+
+/* line 23, ../sass/_typography.scss */
 h2 {
   font-size: 20.3521px;
 }
 
-/* line 15, ../sass/_typography.scss */
+/* line 27, ../sass/_typography.scss */
 h3 {
   font-size: 17.61634px;
 }
 
-/* line 19, ../sass/_typography.scss */
+/* line 31, ../sass/_typography.scss */
 a {
   color: #919191;
   text-decoration: none;
 }
-/* line 22, ../sass/_typography.scss */
+/* line 34, ../sass/_typography.scss */
 a:hover {
   color: #6a6a6a;
 }
 
 /* Head block */
 /* Displays the blog header */
+/* line 4, ../sass/components/_head-block.scss */
+.head-block {
+  padding-bottom: 25.888px;
+}
+
 /* Posts list */
 /* Displays posts in a list */
 /* Post overview */
 /* Displays an overview of the post */
+/* line 4, ../sass/components/_post-overview.scss */
+.post-overview {
+  padding-bottom: 20.3521px;
+}
+
+/* line 8, ../sass/components/_post-overview.scss */
+.post-overview__title {
+  position: relative;
+  /* margin overlaps with anchor's padding below */
+  margin-bottom: 12.57855px;
+  /* The before-title whisker */
+}
+/* line 12, ../sass/components/_post-overview.scss */
+.post-overview__title a {
+  position: relative;
+  padding-bottom: 12.57855px;
+  /* the after-title underline */
+}
+/* line 16, ../sass/components/_post-overview.scss */
+.post-overview__title a:before {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  bottom: 11.15286px;
+  background-color: #e1e1e1;
+}
+/* line 28, ../sass/components/_post-overview.scss */
+.post-overview__title:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 1px;
+  background-color: #e1e1e1;
+  top: 53%;
+  left: -41.88678px;
+}
+
 /* Post body */
 /* Displays the body copy for the post */
