@@ -1,5 +1,7 @@
 # Picks articles for rendering
 require 'github/markup'
+require 'sanitize'
+
 module ArticlesHelper
   ARTICLES_DIRECTORY = "source/posts"
   RENDERED_ARTICLES_DIRECTORY = "posts"
@@ -21,11 +23,6 @@ module ArticlesHelper
 
   def parsed_articles
     articles.map { | article | parse_article(article) }
-  end
-
-  # TODO: make into a separate class
-  def fetch_article(id)
-    parsed_articles.find { | article | article[:id] == id }
   end
 
   private
@@ -65,7 +62,10 @@ module ArticlesHelper
   end
 
   def excerpt_article(article_content)
-    "#{article_content[0..120]}..."
+    recited_content = bracket_citations(article_content)
+    sanitized_content = Sanitize.fragment(recited_content)
+    first_two_sentences = get_first_two_sentences(sanitized_content)
+    tidy_content(first_two_sentences)
   end
   # --- END separate class ---
 
@@ -73,4 +73,17 @@ module ArticlesHelper
     File.basename(filename, File.extname(filename))
   end
 
+  def get_first_two_sentences(content)
+    recited_content = bracket_citations(content)
+    sentences_arr = recited_content.split(".")[0..1].map { | sentence | "#{sentence}." }
+    sentences_arr.join
+  end
+
+  def tidy_content(content)
+    content.delete("\n").strip
+  end
+
+  def bracket_citations(content)
+    content.gsub("\<cite\>", "(").gsub("\<\/cite\>", ")")
+  end
 end

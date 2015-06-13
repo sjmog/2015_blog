@@ -1,5 +1,3 @@
-# If you do not have OpenSSL installed, update
-# the following line to use "http://" instead
 source 'https://rubygems.org'
 
 gem 'rake'
@@ -10,6 +8,7 @@ gem "middleman-deploy"
 
 gem 'redcarpet'
 gem 'github-markup'
+gem 'sanitize'
 
 # Live-reloading plugin
 gem "middleman-livereload", "~> 3.1.0"

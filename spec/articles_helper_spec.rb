@@ -51,6 +51,11 @@ describe ArticlesHelperWrapper do
       create_test_article!
       expect(subject.parsed_articles.last[:title]).to eq "Test article"
     end
+
+    it "excerpts to the nearest sentence" do
+      create_test_article!
+      expect(subject.parsed_articles.last[:excerpt]).to eq "This article should be deleted. Delete it now."
+    end
   end
 
   private
@@ -70,14 +75,14 @@ describe ArticlesHelperWrapper do
   end
 
   def test_article_text
-    "#Test article\nThis article should be deleted."
+    "#Test article\nThis article should be deleted. Delete it now."
   end
 
   def test_article_html
-    "<h1>Test article</h1>\n\n<p>This article should be deleted.</p>\n"
+    "<h1>Test article</h1>\n\n<p>This article should be deleted. Delete it now.</p>\n"
   end
 
   def test_article_html_without_title
-    "\n\n<p>This article should be deleted.</p>\n"
+    "\n\n<p>This article should be deleted. Delete it now.</p>\n"
   end
 end
