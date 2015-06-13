@@ -2,7 +2,7 @@
 require 'github/markup'
 module ArticlesHelper
   ARTICLES_DIRECTORY = "source/posts"
-  RENDERED_ARTICLES_DIRECTORY = "source/rendered_posts"
+  RENDERED_ARTICLES_DIRECTORY = "posts"
 
   def articles
     article_paths = fetch_article_paths
