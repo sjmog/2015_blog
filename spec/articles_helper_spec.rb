@@ -30,11 +30,6 @@ describe ArticlesHelperWrapper do
       expect(subject.articles.count).to eq initial_count + 1
     end
 
-    it "generates an id for that article" do
-      create_test_article!
-      expect(subject.articles.last[:id]).not_to be_nil
-    end
-
     it "generates a file_title for the article" do
       create_test_article!
       expect(subject.articles.last[:file_title]).to eq 'zzz_test_article'
@@ -58,14 +53,6 @@ describe ArticlesHelperWrapper do
     end
   end
 
-  context "viewing an article" do
-    it "fetches an article given an id" do
-      create_alternate_test_article!
-      expect(subject.fetch_article(1)[:title]).to eq "Test article"
-      destroy_alternate_test_article!
-    end
-  end
-
   private
 
   def random_hash
@@ -80,16 +67,6 @@ describe ArticlesHelperWrapper do
 
   def destroy_test_article!
     File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/zzz_test_article.md")
-  end
-
-  def create_alternate_test_article!
-    File.open("#{ArticlesHelper::ARTICLES_DIRECTORY}/aaa_test_article.md", "w") do | f |
-      f.write(test_article_text)
-    end
-  end
-
-  def destroy_alternate_test_article!
-    File.delete("#{ArticlesHelper::ARTICLES_DIRECTORY}/aaa_test_article.md")
   end
 
   def test_article_text
