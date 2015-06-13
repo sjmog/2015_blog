@@ -1,12 +1,16 @@
 ---
-title: <%= title %>
+title: My Blog
 ---
 
+<% post = fetch_article(request.params[:post].to_i) %>
+
 <%= partial :"_head-block", locals: { 
-  title: "My Blog"
+  title: post[:title]
 } %>
 
-This is a post.
+<%= partial :"_post-body", locals: {
+  body: post[:body]
+} %>
 
 <%= partial :"_footer", locals: {} %>
 
