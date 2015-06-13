@@ -8,7 +8,10 @@
 Domain models give a high-level overview of the entities that make up a particular area of interest, and the links between them.
 
 ###What is a domain model not?
+>
+
 >A domain model is **not** a full-featured logical description of a database schema or a program structure. 
+>
 
 It is chiefly a way to get a broad-brush overview of an area of interest, and may be used to start developing more complex models (such as database schema).
 

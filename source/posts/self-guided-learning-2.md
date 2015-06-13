@@ -1,4 +1,4 @@
-# Self-guided learning 2: The Knowledge Dimension
+# Self-guided learning II: The Knowledge Dimension
 
 > In the previous article, we looked at what Bloom's Taxonomy was and where it is used. We began to look at ways a solid grounding in the taxonomy can help learners to scaffold their own learning (by knowing, given any specific topic, where they are in the taxonomy, and by providing a route to higher levels of proficiency), and how educators and curriculum developers use the taxonomy to craft learning objectives. In the article after this one, we will look at some of the tools we can use to construct learning scaffolds which link learning objectives together. In this article, we'll look at another aspect of the taxonomy – the Knowledge Dimension – and how we can use *metacognitive* knowledge to develop appropriate strategies for rapid learning. We'll also look at some examples of these strategies, and how the taxonomy helps us to select the right ones to use in particular learning contexts.
 

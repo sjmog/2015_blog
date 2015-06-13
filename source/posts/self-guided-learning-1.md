@@ -1,10 +1,8 @@
-# Self-guided learning
-
-###I. Introducing Bloom's Taxonomy
+# Self-guided learning I: Introducing Bloom
 
 > This is a series of articles aimed at both students and educators. In three parts, we look at how *Bloom's Taxonomy* (1956, revised 2001) can be applied to everyday learning. In this first article, we're going to introduce the Taxonomy. In the second article, we'll look at how learners can use the theory to guide their own learning and build *metacognitive* skills. In the third article, we'll look at how educators can use the theory to create clear, robust, and efficient curricula.
 
-####What's Bloom's Taxonomy?
+###What's Bloom's Taxonomy?
 [Bloom's Taxonomy](http://www.casact.org/admissions/syllabus/Blooms-Taxonomy.pdf) models the increasing complexity of cognitive tasks. It can be used as a yardstick to gauge how much effort any given cognitive task will require, what level of familiarity learners should have with a topic before attempting such a task, and how best to scaffold learners' learning so they can approach increasingly complex tasks as rapidly and memorably as possible. 
 
 The taxonomy was originally developed across several US universities from 1949 to 1956, and is generally considered to be one of the most, if not the most, important models in educational theory. It has been translated into 22 languages, and forms the backbone of almost all formal curricula around the world (and a good number of popular informal ones).
@@ -22,7 +20,7 @@ Bloom's Taxonomy divides the process of learning a topic into 'stages', each mor
 
 The taxonomy asserts that, given a particular topic, proficiency in 'simpler' cognitive processes is required for mastery of more complex ones. For example, a learner should be able to break down the inner workings of a Ruby `while` loop (Analysis) before they go and write their own (Synthesis). It also asserts that learners have to do one step after the other: you can't jump straight from recalling what happens when you multiply two numbers together (Knowledge) to critiquing someone's PhD on Abelian multiplication (Evaluation).
 
-####Why is Bloom's Taxonomy worth knowing?
+###Why is Bloom's Taxonomy worth knowing?
 
 According to the original 1956 publication, Bloom's Taxonomy provides:
 
@@ -31,9 +29,9 @@ According to the original 1956 publication, Bloom's Taxonomy provides:
 - a single approach to tracking progress throughout a certain topic (or *domain*), as learners can clearly identify 'where they are' in the topic-learning process, and
 - Clearer indication of where a particular learning experience sits within the educational possibilities of a topic as a whole. In other words, an idea of what a learner *doesn't* know, as well as what there is *yet to learn*.
 
-####Who uses Bloom's Taxonomy?
+###Who uses Bloom's Taxonomy?
 
-######Educational bodies
+####Educational bodies
 
 One of the big insights the taxonomy offered was that planned curricula tend to overwhelmingly focus on Knowledge (fact recognition and recall) at the expense of the *real* (or most memorable, at any rate) learning goals: Comprehension (understanding), and Synthesis (the creation of new things). 
 
@@ -41,7 +39,7 @@ As a result, Bloom's Taxonomy is used by educational bodies to upgrade unbalance
 
 There are several tools (for example, [Taxonomy Tables](http://www.etc.edu.cn/eet/articles/bloomrev/chart2.jpg)) that are widely used to boost learning efficiency in this way. Spending less time recalling facts and rote-learning basics, and more time spent debating and discussing topics in action or building projects, makes for far more efficient learning. On the flip side, attempting to do higher-level tasks without knowing or comprehending the basics of a topic causes confusion, upset, and a drastic decrease in motivation. The most efficient learning scaffolds are those that make use of Bloom's Taxonomy.
 
-######Learners
+####Learners
 
 In much the same way as institutions, Bloom's Taxonomy can be used by individual learners to:
 
@@ -50,15 +48,20 @@ In much the same way as institutions, Bloom's Taxonomy can be used by individual
 - Scaffold self-guided learning so learners can enhance their abilities in a topic area without requiring instruction, and
 - Aspire to higher levels of cognitive ability in a topic area in a structured way.
 
-####So why was Bloom's Taxonomy revised?
+###So why was Bloom's Taxonomy revised?
 
 To understand why Bloom's Taxonomy required revision, we should know something about how it's applied to creating *learning objectives*.
 
 Well-planned curricula are split up into *learning objectives*, which are usually a combination of a verb (always a cognitive process) and a noun (always a topic). Here's an example learning objective:
 
+>
+
 > Students should be able to *remember* <small>(verb)</small> the *law of supply and demand* <small>(noun)</small>
+>
 
 Here's another:
+
+>
 
 > Learners will *understand* the *importance of pair programming in a team environment*
 
@@ -79,7 +82,7 @@ The revision also took aim at the *noun* part of learning objectives, splitting 
 
 <small>*The revision further divided these 6 levels into sublevels: the full 2001 taxonomy is included below.</small>
 
-######Full revised taxonomy
+##Full revised taxonomy
 
 In the full revised taxonomy, each cognitive process is broken down into subcategories. Learners also proceed through these in a linear fashion, although there is some overlap between cognitive processes as a result*.
 

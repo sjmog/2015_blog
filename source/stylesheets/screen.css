@@ -96,7 +96,7 @@ body {
 
 /* TYPOGRAPHY */
 /* line 3, ../sass/_typography.scss */
-p, ul, ol, li {
+p, ul, ol, li, blockquote {
   font-size: 18.48475px;
   color: #5e5e5e;
 }
@@ -196,7 +196,7 @@ a:hover {
   line-height: 1.8;
 }
 /* line 86, ../sass/_typography.scss */
-.posts ul, .posts ol {
+.posts ul, .posts ol, .posts blockquote {
   padding-left: 41.88678px;
 }
 /* line 89, ../sass/_typography.scss */
@@ -215,6 +215,39 @@ a:hover {
   background-color: #e1e1e1;
   top: 16px;
   left: -41.88678px;
+}
+/* line 2, ../sass/_mixins.scss */
+.posts blockquote:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 107, ../sass/_typography.scss */
+.posts blockquote p {
+  position: relative;
+  font-size: 21.35537px;
+  font-style: italic;
+  /* border to the left */
+}
+/* line 112, ../sass/_typography.scss */
+.posts blockquote p:before {
+  content: "";
+  position: absolute;
+  left: -41.88678px;
+  height: 100%;
+  top: 0;
+  width: 2px;
+  background-color: #e1e1e1;
+}
+/* line 122, ../sass/_typography.scss */
+.posts blockquote:nth-of-type(2n) p {
+  margin-top: -16px;
+  font-size: 18.48475px;
+  color: #919191;
+}
+/* line 126, ../sass/_typography.scss */
+.posts blockquote:nth-of-type(2n) p:before {
+  display: none;
 }
 
 /* Head block */

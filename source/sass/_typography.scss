@@ -1,6 +1,6 @@
 /* TYPOGRAPHY */
 
-p, ul, ol, li {
+p, ul, ol, li, blockquote {
   font-size: ms-modify($base-font-size, 1.3) + px;
   color: lighten($body-font-color, 10%);
 }
@@ -83,7 +83,7 @@ a {
     margin-bottom: ms-modify($base-font-size, 2) + px;
     line-height: 1.8;
   }
-  ul, ol {
+  ul, ol, blockquote {
     padding-left: ms-modify($base-font-size, 3) + px;
   }
   li {
@@ -99,6 +99,32 @@ a {
       background-color: darken($bg, 10%);
       top: ms-modify($base-font-size, 1) + px;
       left: -1 * ms-modify($base-font-size, 3) + px;
+    }
+  }
+  blockquote {
+    @include clearfix;
+  }
+  blockquote p {
+    position: relative;
+    font-size: ms-modify($base-font-size, 1.6) + px;
+    font-style: italic;
+    /* border to the left */
+    &:before {
+      content: "";
+      position: absolute;
+      left: -1 * ms-modify($base-font-size, 3) + px;
+      height: 100%;
+      top: 0;
+      width: 2px;
+      background-color: darken($bg, 10%);
+    }
+  }
+  blockquote:nth-of-type(2n) p {
+    margin-top: -1 * ms-modify($base-font-size, 1) + px;
+    font-size: ms-modify($base-font-size, 1.3) + px;
+    color: lighten($body-font-color, 30%);
+    &:before {
+      display: none;
     }
   }
 }
