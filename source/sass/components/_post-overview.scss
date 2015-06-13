@@ -31,7 +31,7 @@
     width: $base-font-size + px;
     height: 1px;
     background-color: darken($bg, 10%);
-    top: 53%;
+    top: ms-modify($base-font-size, 1) + px;
     left: -1 * ms-modify($base-font-size, 3) + px;
   }
 }

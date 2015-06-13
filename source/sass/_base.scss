@@ -2,11 +2,18 @@
 
 body {
   background: $bg;
-  padding-left: 16%;
-  padding-top: 14%;
+  padding: 14% 0 14% 16%;
 
   font-family: "freight-text-pro", Georgia;
   font-size: ms-modify($base-font-size, 1.1) + px;
   line-height: 1.5;
   color: $body-font-color;
+
+  @media screen and (max-width: $mobile) {
+    padding: 14% 4%;
+  }
+}
+
+.main {
+  max-width: 680px;
 }
