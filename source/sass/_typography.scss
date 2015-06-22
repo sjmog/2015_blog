@@ -17,7 +17,7 @@ h1 {
   font-size: ms-modify($base-font-size, 2.2) + px;
   color: lighten($body-font-color, 30%);
   /* the after-title underline */
-  &:before {
+  /*&:before {
     content: "";
     position: absolute;
     display: block;
@@ -26,7 +26,7 @@ h1 {
     height: 1px;
     bottom: -1 * ms-modify($base-font-size, 0.25) + px;
     background-color: darken($bg, 10%);
-  }
+  }*/
 }
 
 h2 {
@@ -59,7 +59,7 @@ a {
     margin-bottom: ms-modify($base-font-size, 3) + px;
     font-size: ms-modify($base-font-size, 2.2) + px;
     /* the after-title underline */
-    &:before {
+    /*&:before {
       content: "";
       position: absolute;
       display: block;
@@ -68,7 +68,7 @@ a {
       height: 1px;
       bottom: -1 * ms-modify($base-font-size, 0.25) + px;
       background-color: darken($bg, 10%);
-    }
+    }*/
   }
   h2 {
     font-size: ms-modify($base-font-size, 2.0) + px;

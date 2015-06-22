@@ -115,17 +115,16 @@ h1 {
   font-size: 28.50324px;
   color: #919191;
   /* the after-title underline */
-}
-/* line 20, ../sass/_typography.scss */
-h1:before {
-  content: "";
-  position: absolute;
-  display: block;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  bottom: -11.15286px;
-  background-color: #e1e1e1;
+  /*&:before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    bottom: -1 * ms-modify($base-font-size, 0.25) + px;
+    background-color: darken($bg, 10%);
+  }*/
 }
 
 /* line 32, ../sass/_typography.scss */
@@ -166,17 +165,16 @@ a:hover {
   margin-bottom: 41.88678px;
   font-size: 28.50324px;
   /* the after-title underline */
-}
-/* line 62, ../sass/_typography.scss */
-.posts h1:before {
-  content: "";
-  position: absolute;
-  display: block;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  bottom: -11.15286px;
-  background-color: #e1e1e1;
+  /*&:before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    bottom: -1 * ms-modify($base-font-size, 0.25) + px;
+    background-color: darken($bg, 10%);
+  }*/
 }
 /* line 73, ../sass/_typography.scss */
 .posts h2 {
