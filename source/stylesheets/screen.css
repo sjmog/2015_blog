@@ -248,6 +248,26 @@ a:hover {
   display: none;
 }
 
+/* line 132, ../sass/_typography.scss */
+code {
+  font-family: Menlo,Monaco,"Courier New",Courier,monospace;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 5px;
+  white-space: pre-wrap;
+}
+
+/* line 140, ../sass/_typography.scss */
+pre > code {
+  padding: 24px !important;
+}
+
+/* line 144, ../sass/_typography.scss */
+pre > code > span:first-child {
+  position: relative;
+  top: -12px;
+}
+
 /* Head block */
 /* Displays the blog header */
 /* Posts list */
