@@ -17,9 +17,9 @@ My personal style guide:
     myThing.innerHTML = "I'll show now";
   &lt;/script&gt;
   </code>
-<pre>
+</pre>
 
-By this logic, it's **totally OK to use `id` attributes for JavaScript-led testing**. Capybara doesn't use JavaScript to tell if elements are on a page, though, so `id` doesn't seem the right attribute to use.
+By this logic, it's **totally OK to use `id` attributes for JavaScript-led testing.** Capybara doesn't use JavaScript to tell if elements are on a page, though, so `id` doesn't seem the right attribute to use.
 
 2. Add `class` attributes to HTML elements to tell what they are:
 
