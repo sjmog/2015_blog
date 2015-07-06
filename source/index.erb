@@ -1,9 +1,10 @@
 ---
-title: My Blog
+title: Sam Morgan's Blog
 ---
 
 <%= partial :"_head-block", locals: { 
-  title: "My Blog"
+  title: "Blog",
+  leader: "Sam Morgan is a developer working across the full stack. He's passionate about <a href='http://manifesto.softwarecraftsmanship.org/' target='_blank'>Software Craftsmanship</a> and education. He works as a coach at <a href='http://www.makersacademy.com/' target='_blank'>Makers Academy</a> in London."
 } %>
 
 <%= partial :"_posts-list", locals: { posts: parsed_articles } %>
