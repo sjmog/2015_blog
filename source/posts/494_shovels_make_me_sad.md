@@ -6,7 +6,8 @@ Ruby's shovel operator is for mutating stuff, right? Except Fixnums can't be mut
 
 Not familiar with the `<<` ('shovel') operator?
 
-```
+<pre>
+  <code>
 string_a = "Hello"
 string_b = " World"
 
@@ -14,7 +15,8 @@ string_a << string_b  # => "Hello World"
 
 # Look! The shovel mutated string_a!
 string_a              # => "Hello World"
-```
+</code>
+</pre>
 
 So shovels tend to mutate stuff, 'in-place'.
 
@@ -22,20 +24,24 @@ So shovels tend to mutate stuff, 'in-place'.
 
 There is only one `Fixnum` instance for any given integer value (each instance has an `object_id` equal to the integer value * 2 + 1). Therefore, you'd expect `<<` to fail on Fixnum instances, because you can't mutate an object into another object:
 
-```
+<pre>
+  <code>
 # This should definitely not work
 1.object_id   # => 3
 1 << 1        # => 2 :(
 
 # So I guess this should happen instead
 1 << 1        # => NoMethodError '<<' for Fixnum
-```
+</code>
+</pre>
 
 This should happen because `<<` should be universally understood to be a mutation operator. BUT, in the case of `Fixnum`s:
 
-```
+<pre>
+  <code>
 1 << 1        # => 2
-```
+</code>
+</pre>
 
 _and_ the `<<` doesn't change the state of the `Fixnum` (we knew it couldn't for the reasons above).
 
