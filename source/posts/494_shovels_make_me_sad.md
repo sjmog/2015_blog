@@ -1,6 +1,6 @@
 # Shovels make me sad
 
-Ruby's shovel operator is for mutating stuff, right? Except Fixnums can't be mutated like that...but they shovel anyway.
+Ruby's shovel operator is for mutating stuff, right? Except Fixnums can't be mutated like that: but they shovel anyway.
 
 ### The Shovel
 
