@@ -20,7 +20,9 @@ In the UK, [13% of STEM jobs belong to women](https://www.wisecampaign.org.uk/re
 
 We should care because it’s wrong. But more on that later - this paragraph, let’s care because it coincides with a [serious skills shortage](http://www.economist.com/news/britain/21648003-lack-skilled-workers-and-managers-drags-country-down-mind-gap). 59% of STEM businesses report the shortage as a “serious threat to their business in the UK". In response to this shortage, we are failing to leverage half our available resources with even a modicum of efficiency.
 
-> “Well, if you’re not fully utilising half the talent in the country, you’re not going to get too close to the Top 10” - [Bill Gates (attrib.)](http://www.nytimes.com/2009/08/23/magazine/23Women-t.html?pagewanted=5&_r=0), Saudi Arabia
+> “Well, if you’re not fully utilising half the talent in the country, you’re not going to get too close to the Top 10”
+
+> <cite>[Bill Gates (attrib.)](http://www.nytimes.com/2009/08/23/magazine/23Women-t.html?pagewanted=5&_r=0)</cite>, Saudi Arabia
 
 This isn’t just a problem for the UK. In America, things are still terrible: [24% of STEM jobs are in the hands of women](http://www.esa.doc.gov/sites/default/files/womeninstemagaptoinnovation8311.pdf). The skills shortage is a global issue, and figures like Tim Hunt - with global presence and global influence - have the clout to impact a large number of people.
 
@@ -45,6 +47,8 @@ Instead, men are told that they must embody rationality, ownership, strength, an
 Imran Khan, Chief Executive of the British Science Association, had this to say concerning Sir Tim’s comments:
 
 > “It’s hard to find Sir Tim’s comments funny if you’ve been held back by systemic bias for years”
+
+> <cite>Imran Khan</cite>
 
 Tim Hunt might be a lovely person, but that’s not the issue here. The issue is how the things lovely - and less lovely - people contribute to or detract from a systemic problem. If we were halfway brought up right, we were told as kids “don’t be sexist”, and we internalised that to mean “don’t say sexist things to other people, unless it’s clear that they’re in on the joke”. But this is micro-sexism, and we need to be hitting hard at the macro. For reasons I hope I’ve made clear, the only way to do that is by going out of our way to combat sexism we see. Unfortunately for him, his supporters, and his admirers, Tim Hunt’s resignation is part and parcel of that grander social endeavour. I hope he can see it that way, too.
 
