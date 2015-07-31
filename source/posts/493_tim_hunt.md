@@ -20,7 +20,7 @@ In the UK, [13% of STEM jobs belong to women](https://www.wisecampaign.org.uk/re
 
 We should care because it’s wrong. But more on that later - this paragraph, let’s care because it coincides with a [serious skills shortage](http://www.economist.com/news/britain/21648003-lack-skilled-workers-and-managers-drags-country-down-mind-gap). 59% of STEM businesses report the shortage as a “serious threat to their business in the UK". In response to this shortage, we are failing to leverage half our available resources with even a modicum of efficiency.
 
-“Well, if you’re not fully utilising half the talent in the country, you’re not going to get too close to the Top 10” - Bill Gates (attrib.), Saudi Arabia (http://www.nytimes.com/2009/08/23/magazine/23Women-t.html?pagewanted=5&_r=0)
+> “Well, if you’re not fully utilising half the talent in the country, you’re not going to get too close to the Top 10” - [Bill Gates (attrib.)](http://www.nytimes.com/2009/08/23/magazine/23Women-t.html?pagewanted=5&_r=0), Saudi Arabia
 
 This isn’t just a problem for the UK. In America, things are still terrible: [24% of STEM jobs are in the hands of women](http://www.esa.doc.gov/sites/default/files/womeninstemagaptoinnovation8311.pdf). The skills shortage is a global issue, and figures like Tim Hunt - with global presence and global influence - have the clout to impact a large number of people.
 
