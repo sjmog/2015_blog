@@ -44,7 +44,7 @@ Instead, men are told that they must embody rationality, ownership, strength, an
 
 Imran Khan, Chief Executive of the British Science Association, had this to say concerning Sir Tim’s comments:
 
->“It’s hard to find Sir Tim’s comments funny if you’ve been held back by systemic bias for years”
+> “It’s hard to find Sir Tim’s comments funny if you’ve been held back by systemic bias for years”
 
 Tim Hunt might be a lovely person, but that’s not the issue here. The issue is how the things lovely - and less lovely - people contribute to or detract from a systemic problem. If we were halfway brought up right, we were told as kids “don’t be sexist”, and we internalised that to mean “don’t say sexist things to other people, unless it’s clear that they’re in on the joke”. But this is micro-sexism, and we need to be hitting hard at the macro. For reasons I hope I’ve made clear, the only way to do that is by going out of our way to combat sexism we see. Unfortunately for him, his supporters, and his admirers, Tim Hunt’s resignation is part and parcel of that grander social endeavour. I hope he can see it that way, too.
 
