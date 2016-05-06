@@ -1,6 +1,6 @@
 # How to be a better ally
 
-This is a post about how to be a better ally in support of oppressed groups. It uses feminism as the main example. It is primarily aimed at men who are aiming to become better allies to feminist women, or cisgender people who are aiming to become better allies to transgender people, but it applies to 
+This is a post about how to be a better ally in support of oppressed groups. It uses feminism as the main example. It is primarily aimed at men who are aiming to become better allies to feminist women, or cisgender people who are aiming to become better allies to transgender people, but it applies to anyone who wants to support of advocate in legion with people who lack the cultural and lived privileges you have.
 
 If you're reading this, you probably have all the qualities I'm going to suggest. Awesome! That said, maybe you can pick up something regardless. Let's start.
 
