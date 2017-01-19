@@ -1,6 +1,6 @@
 # Novice TDD: Race to Green
 
-'Red, Green, Refactor': that's a helpful mantra for writing your code test-first. But how long should you spend on each stage, and how can you effectively separate each stage from the other?
+'Red, Green, Refactor': that's a helpful mantra for writing your code test-first. But how long should you spend on each stage, and how can you effectively separate each stage from the other? The answer: Make it Work, then Make it Good.
 
 ### Race to Green
 
