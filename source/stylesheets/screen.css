@@ -2,7 +2,7 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 5, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,45 +24,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../Users/Sam/.rvm/gems/ruby-2.2.2/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
@@ -102,12 +102,22 @@ p, ul, ol, li, blockquote {
 }
 
 /* line 8, ../sass/_typography.scss */
+em {
+  font-style: italic;
+}
+
+/* line 12, ../sass/_typography.scss */
+strong {
+  font-weight: bold;
+}
+
+/* line 16, ../sass/_typography.scss */
 small {
   font-size: 14.53196px;
   color: #777777;
 }
 
-/* line 13, ../sass/_typography.scss */
+/* line 21, ../sass/_typography.scss */
 h1 {
   display: inline-block;
   position: relative;
@@ -127,38 +137,38 @@ h1 {
   }*/
 }
 
-/* line 32, ../sass/_typography.scss */
+/* line 40, ../sass/_typography.scss */
 h2 {
   font-size: 25.888px;
 }
 
-/* line 35, ../sass/_typography.scss */
+/* line 43, ../sass/_typography.scss */
 h3 {
   font-size: 23.51272px;
 }
 
-/* line 38, ../sass/_typography.scss */
+/* line 46, ../sass/_typography.scss */
 h4 {
   font-size: 21.35537px;
 }
 
-/* line 42, ../sass/_typography.scss */
+/* line 50, ../sass/_typography.scss */
 a {
   color: #919191;
   text-decoration: none;
 }
-/* line 45, ../sass/_typography.scss */
+/* line 53, ../sass/_typography.scss */
 a:hover {
   color: #6a6a6a;
 }
 
 /* long form */
-/* line 52, ../sass/_typography.scss */
+/* line 60, ../sass/_typography.scss */
 .posts h1, .posts h2, .posts h3, .posts h4, .posts h5, .posts h6 {
   margin-bottom: 12.57855px;
   color: #919191;
 }
-/* line 56, ../sass/_typography.scss */
+/* line 64, ../sass/_typography.scss */
 .posts h1 {
   display: inline-block;
   position: relative;
@@ -176,35 +186,35 @@ a:hover {
     background-color: darken($bg, 10%);
   }*/
 }
-/* line 73, ../sass/_typography.scss */
+/* line 81, ../sass/_typography.scss */
 .posts h2 {
   font-size: 25.888px;
 }
-/* line 76, ../sass/_typography.scss */
+/* line 84, ../sass/_typography.scss */
 .posts h3 {
   font-size: 23.51272px;
 }
-/* line 79, ../sass/_typography.scss */
+/* line 87, ../sass/_typography.scss */
 .posts h4 {
   font-size: 21.35537px;
 }
-/* line 82, ../sass/_typography.scss */
+/* line 90, ../sass/_typography.scss */
 .posts p, .posts ul, .posts ol {
   margin-bottom: 25.888px;
   line-height: 1.8;
 }
-/* line 86, ../sass/_typography.scss */
+/* line 94, ../sass/_typography.scss */
 .posts ul, .posts ol, .posts blockquote {
   padding-left: 41.88678px;
 }
-/* line 89, ../sass/_typography.scss */
+/* line 97, ../sass/_typography.scss */
 .posts li {
   position: relative;
   margin-bottom: 16px;
   color: #5e5e5e;
   line-height: 1.8;
 }
-/* line 94, ../sass/_typography.scss */
+/* line 102, ../sass/_typography.scss */
 .posts li:before {
   content: "";
   position: absolute;
@@ -220,14 +230,14 @@ a:hover {
   display: table;
   clear: both;
 }
-/* line 107, ../sass/_typography.scss */
+/* line 115, ../sass/_typography.scss */
 .posts blockquote p {
   position: relative;
   font-size: 21.35537px;
   font-style: italic;
   /* border to the left */
 }
-/* line 112, ../sass/_typography.scss */
+/* line 120, ../sass/_typography.scss */
 .posts blockquote p:before {
   content: "";
   position: absolute;
@@ -237,18 +247,18 @@ a:hover {
   width: 2px;
   background-color: #e1e1e1;
 }
-/* line 122, ../sass/_typography.scss */
+/* line 130, ../sass/_typography.scss */
 .posts blockquote:nth-of-type(2n) p {
   margin-top: -16px;
   font-size: 18.48475px;
   color: #919191;
 }
-/* line 126, ../sass/_typography.scss */
+/* line 134, ../sass/_typography.scss */
 .posts blockquote:nth-of-type(2n) p:before {
   display: none;
 }
 
-/* line 132, ../sass/_typography.scss */
+/* line 140, ../sass/_typography.scss */
 code {
   font-family: Menlo,Monaco,"Courier New",Courier,monospace;
   font-size: 14px;
@@ -257,7 +267,7 @@ code {
   white-space: pre-wrap;
 }
 
-/* line 140, ../sass/_typography.scss */
+/* line 148, ../sass/_typography.scss */
 pre > code {
   padding: 24px !important;
 }

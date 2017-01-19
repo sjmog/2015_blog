@@ -5,6 +5,14 @@ p, ul, ol, li, blockquote {
   color: lighten($body-font-color, 10%);
 }
 
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: $bold-font-weight;
+}
+
 small {
   font-size: ms-modify($base-font-size, 0.8) + px;
   color: lighten($body-font-color, 20%);
