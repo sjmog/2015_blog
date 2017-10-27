@@ -168,3 +168,9 @@ DEPENDENCIES
   sanitize
   tzinfo-data
   wdm (~> 0.1.0)
+
+RUBY VERSION
+   ruby 2.2.1p85
+
+BUNDLED WITH
+   1.13.7
