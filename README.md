@@ -1,7 +1,7 @@
 Blog
 ==
 
-A minimal blog for 2015.
+A minimal blog.
 
 Development should be done on the `source` branch.
 
