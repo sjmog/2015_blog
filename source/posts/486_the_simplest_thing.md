@@ -4,16 +4,137 @@ The conventional wisdom when doing programming is to start with the ‘simplest 
 
 I see four main candidates for the ‘simplest thing’: 
 
-- components, 
 - interactions, 
-- rules, and 
+- rules,
+- components, and
 - chunks. 
+
+_The simplest interaction_ involves building one small interaction with one object: one whose interface you have designed. _The simplest rule_ involves identifying some constraint on the system and building that. _The simplest component_ involves building the smallest, most atomic part of the system. _The simplest chunk_ involves identifying one large-ish object in the program, building it, and breaking it down into smaller objects.
 
 Using the [Bank Tech Test](https://github.com/lauraweston/bank-tech-test), here are four different first steps you could take.
 
+
+### The simplest interaction.
+
+The _simplest interaction_ is my favourite first building block: a [behavioural one](http://ruby-for-beginners.rubymonstas.org/writing_classes/state_and_behaviour.html). An interaction is an atomic transaction with a program object. For instance: ‘an Account can store money’. 
+
+- First, build the interaction as simply as possible. 
+- Then, look at the next interaction in the system, for example ‘an Account can withdraw money’.
+
+One benefit to this approach is that it allows us to think about a high-level interface first. We can start by writing a test for the code we wish worked:
+
+<pre>
+  <code>
+  # An account can store money
+  my_barclays_account = Account.new
+  my_barclays_account.store(10) # => 10
+  my_barclays_account.store(10) # => 20
+  </code>
+</pre>
+
+Then we can make it work.
+
+<pre>
+  <code>
+  class Account
+    def initialize
+      @balance = 0
+    end
+
+    def store(amount)
+      @balance += amount
+    end
+  end
+  </code>
+</pre>
+
+Because we're starting with an interface, starting from the simplest interaction is amenable to [outside-in TDD](https://dannorth.net/introducing-bdd/). This means we can use an integration test to build out the Account interface:
+
+<pre>
+  <code>
+  RSpec.describe 'Interacting with an Account' do
+    describe '#store' do
+      it 'stores money' do
+        my_barclays_account = Account.new
+
+        my_barclays_account.store(10)
+
+        expect(my_barclays_account.store(10)).to eq 20
+      end
+    end
+  end
+  </code>
+</pre>
+
+(At the moment, we've only got one class: the Account. But later, Account might rely on other things. This integration test will grow to test the Account interface without mocking anything else.)
+
+Repeated application of _the simplest interaction_ will start to produce _the simplest chunk_ (see the last section). When this starts to happen – that is, when you notice your class contains too many responsibilities – do the following:
+
+- _Extract method_, then (possibly) 
+- _Extract class_. 
+
+That way repeatedly applying _the simplest interaction_ builds towards a complete program manageably.
+
+### The simplest rule.
+
+The _simplest rule_ is another behavioural building block. A rule is something that is necessarily true about a system. For example: ‘an Account cannot be negative’. Another example: ‘an Account cannot store a negative amount’. 
+
+- Build the rule as simply as possible.
+- Then look at another one.
+
+> A rule is sometimes quite complicated to implement, and fulfilling it may involve many objects. Therefore, it's best to build the rule similarly to building a chunk (see the next section): as a bloated glob with multiple responsibilities. Then, use refactoring techniques to break it down.
+
+Starting with the simplest rule involves both thinking about the interface at a high level _and_ the objects involved, therefore it's amenable to both inside-out and outside-in TDD.
+
+<pre>
+  <code>
+  # An account cannot be negative
+  my_barclays_account = Account.new
+  my_barclays_account.withdraw(10) # => Error: account cannot be negative
+  </code>
+</pre>
+
+We can build the rule quite simply, to start:
+
+<pre>
+  <code>
+  class Account
+    def initialize
+      @balance = 0
+    end
+
+    def withdraw(amount)
+      raise 'Error: account cannot be negative'
+    end
+  end
+  </code>
+</pre>
+
+We can then look at another rule:
+
+<pre>
+  <code>
+  class Account
+    def initialize
+      @balance = 0
+    end
+
+    def store(amount)
+      raise 'Error: cannot store a negative amount'
+    end
+
+    def withdraw(amount)
+      raise 'Error: account cannot be negative'
+    end
+  end
+  </code>
+</pre>
+
+In both of these examples, we've ended up programming away from the [happy path](https://en.wikipedia.org/wiki/Happy_path), but we could have selected rules that kept us to it (for example, 'the balance is the sum of all transactions').
+
 ### The simplest component.
 
-The _simplest component_ is the building block of a system. For example: a quantity, a currency, or a transaction. 
+The _simplest component_ is a more advanced technique. In it, you start by fully-defining the most atomic building block of a system. For example: a quantity, a currency, or a transaction. 
 
 - First, build it. 
 - Then, extend it so it can work with other instances of itself. 
@@ -76,120 +197,11 @@ Now that we have a thorough `Transaction` object, we can easily work with a vari
 
 From here, we can build outwards: perhaps we'd look for something to house the transactions, or something to do calculations with them.
 
-### The simplest interaction.
-
-The _simplest interaction_ is another sort of building block: a [behavioural one](http://ruby-for-beginners.rubymonstas.org/writing_classes/state_and_behaviour.html). An interaction is an atomic transaction with a program object. For instance: ‘an Account can store money’. 
-
-- First, build the interaction as simply as possible. 
-- Then, look at the next interaction in the system, for example ‘an Account can withdraw money’.
-
-One benefit to this approach is that it allows us to think about a high-level interface first. We can start by writing a test for the code we wish worked:
-
-<pre>
-  <code>
-  # An account can store money
-  my_barclays_account = Account.new
-  my_barclays_account.store(10) # => 10
-  my_barclays_account.store(10) # => 20
-  </code>
-</pre>
-
-Then we can make it work.
-
-<pre>
-  <code>
-  class Account
-    def initialize
-      @balance = 0
-    end
-
-    def store(amount)
-      @balance += amount
-    end
-  end
-  </code>
-</pre>
-
-Because we're starting with an interface, starting from the simplest interaction is amenable to [outside-in TDD](https://dannorth.net/introducing-bdd/). This means we can use an integration test to build out the Account interface:
-
-<pre>
-  <code>
-  RSpec.describe 'Interacting with an Account' do
-    describe '#store' do
-      it 'stores money' do
-        my_barclays_account = Account.new
-
-        my_barclays_account.store(10)
-
-        expect(my_barclays_account.store(10)).to eq 20
-      end
-    end
-  end
-  </code>
-</pre>
-
-(At the moment, we've only got one class: the Account. But later, Account might rely on other things. This integration test will grow to test the Account interface without mocking anything else.)
-
-### The simplest rule.
-
-The _simplest rule_ is another behavioural building block. A rule is something that is necessarily true about a system. For example: ‘an Account cannot be negative’. Another example: ‘an Account cannot store a negative amount’. 
-
-- Build the rule as simply as possible.
-- Then look at another one.
-
-> A rule is sometimes quite complicated to implement, and fulfilling it may involve many objects. Therefore, it's best to build the rule similarly to building a chunk (see the next section): as a bloated glob with multiple responsibilities. Then, use refactoring techniques to break it down.
-
-Starting with the simplest rule involves both thinking about the interface at a high level _and_ the objects involved, therefore it's amenable to both inside-out and outside-in TDD.
-
-<pre>
-  <code>
-  # An account cannot be negative
-  my_barclays_account = Account.new
-  my_barclays_account.withdraw(10) # => Error: account cannot be negative
-  </code>
-</pre>
-
-We can build the rule quite simply, to start:
-
-<pre>
-  <code>
-  class Account
-    def initialize
-      @balance = 0
-    end
-
-    def withdraw(amount)
-      raise 'Error: account cannot be negative'
-    end
-  end
-  </code>
-</pre>
-
-We can then look at another rule:
-
-<pre>
-  <code>
-  class Account
-    def initialize
-      @balance = 0
-    end
-
-    def store(amount)
-      raise 'Error: cannot store a negative amount'
-    end
-
-    def withdraw(amount)
-      raise 'Error: account cannot be negative'
-    end
-  end
-  </code>
-</pre>
-
-In both of these examples, we've ended up programming away from the [happy path](https://en.wikipedia.org/wiki/Happy_path), but we could have selected rules that kept us to it (for example, 'the balance is the sum of all transactions').
+I generally recommend **against** _the simplest component_ unless you have a very solid understanding of the problem domain. It therefore works very well when used with [programmer anarchy](https://www.infoq.com/news/2012/02/programmer-anarchy), a post-Agile philosophy developed by [Fred George](https://github.com/fredgeorge).
 
 ### The simplest chunk.
 
-The _simplest chunk_ combines state and behaviour in a building block. For example: ‘an Account’. It's my least preferred first step, because it's too easy to accidentally build a whole program, then wind up with a painful and tedious refactor (which we'll do now). I really only advise starting with the 'simplest chunk' when [spiking](http://www.extremeprogramming.org/rules/spike.html) part of a system.
+The _simplest chunk_ combines state and behaviour in a building block. For example: ‘an Account’. It's my least preferred first step, because it's too easy to accidentally build a whole program, then wind up with a painful and tedious refactor (which we'll do now). I really only advise starting with the _simplest chunk_ when [spiking](http://www.extremeprogramming.org/rules/spike.html) part of a system.
 
 - Build the chunk in as much detail makes sense.
 - Then extract functionality using refactoring techniques – mostly [_extract method_](https://refactoring.guru/extract-method) followed by [_extract class_](https://refactoring.guru/extract-class) – to build out collaborator objects. 
@@ -455,20 +467,21 @@ Let's use _extract class_ a few times:
   </code>
 </pre>
 
-The above is why I don't favour picking the 'simplest chunk': it's too easy to get caught up in doing too much. To avoid this, I'd remove the code I've just written and start again in short, 15-minute TDD cycles. However, doing this activity has opened me to the possibility of the existence of services, a statement object, the Account-as-a-filter, and so on. These are all valuable insights for design decisions I might take as a I move in a more step-by-step manner.
+I advise **against** picking _the simplest chunk_: it's too easy to get caught up in doing too much. People often accidentally build _the simplest chunk_ when what they wanted to build was the _simplest interaction_. A good way to avoid that is to use a rigid 15-minute timebox. If you run over and you're not done (implementation and refactoring), start again with a smaller, simpler interaction.
+
+On the other hand, doing this spike has opened me to the possibility of the existence of services, a statement object, the Account-as-a-filter, and so on. These are all valuable insights for design decisions I might take as a I move in a more step-by-step manner.
 
 ### Summary
 
 There are four different ways to define the 'simplest thing':
 
-- components, 
 - interactions, 
-- rules, and 
+- rules,
+- components, and
 - chunks.
 
-_The simplest component_ involves building the smallest, most atomic part of the system. _The simplest interaction_ involves building one small interaction with one object: one whose interface you have designed. _The simplest rule_ involves identifying some constraint on the system and building that. _The simplest chunk_ involves identifying one large-ish object in the program, building it, and breaking it down into smaller objects.
+_The simplest interaction_ involves building one small interaction with one object: one whose interface you have designed. _The simplest rule_ involves identifying some constraint on the system and building that. _The simplest component_ involves building the smallest, most atomic part of the system. _The simplest chunk_ involves identifying one large-ish object in the program, building it, and breaking it down into smaller objects.
 
 Mostly, my 'simplest step' starts with _the simplest interaction_. After a while, lots of simple interactions lead to an object that looks a bit like _the simplest chunk_: but at that point it's manageable to _extract method_ and then _extract class_.
 
-One thing to avoid is prematurely building out new _simplest chunks_ halfway through building something else. Avoid introducing new objects until _extract method_ and _extract class_ tell you to, or until some deliberate new design step has begun.
-
+One thing to avoid is prematurely building out new _simplest chunks_ halfway through building something else. Avoid introducing new objects until _extract method_ and _extract class_ tell you to, or until some deliberate new design step has begun. A good way to hold yourself to this is to use 15-minute design cycles.
