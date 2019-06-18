@@ -8,7 +8,7 @@ module ArticlesHelper
 
   def articles
     article_paths = fetch_article_paths
-    articles = convert_paths_to_articles(article_paths)
+    articles = convert_paths_to_articles(article_paths.sort)
   end
 
   def parse_article(article)
