@@ -4,8 +4,8 @@ ruby '2.6.3'
 gem 'rake'
 
 gem "middleman"
-
-gem "middleman-deploy"
+gem 'opal'
+gem 'middleman-deploy', '~> 2.0.0.pre.alpha'
 
 gem 'redcarpet'
 gem 'github-markup'

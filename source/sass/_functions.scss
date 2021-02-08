@@ -24,5 +24,5 @@
 /* --- Layout --- */
 
 @function ms-modify($size, $incr) {
-  @return $size * pow(1.618, $incr - 1);
+  @return $size * power(1.618, $incr - 1);
 }

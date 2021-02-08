@@ -1,7 +1,7 @@
 <ol class="posts-list">
   <% posts.each do | post | %>
   <li class="list-item posts-list__list-item">
-    <%= partial :"_post-overview", locals: post %>
+    <%= partial :"components/post-overview", locals: post %>
   </li>
   <% end %>
 </ol>
