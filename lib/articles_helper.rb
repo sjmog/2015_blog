@@ -6,36 +6,37 @@ module ArticlesHelper
   ARTICLES_DIRECTORY = "source/posts"
   RENDERED_ARTICLES_DIRECTORY = "posts"
 
-  def articles
-    article_paths = fetch_article_paths
-    articles = convert_paths_to_articles(article_paths.sort)
+  def parsed_articles
+    articles.map { | article | parsed(article) }
   end
 
-  def parse_article(article)
-    body = GitHub::Markup.render(article[:filename], article[:body])
+  def articles
+    articles_from(article_paths.sort)
+  end
+
+  def parsed(article)
+    content = GitHub::Markup.render(article[:filename], article[:body])
+
     {
       file_title: article[:file_title],
-      title: extract_title(body),
-      body: remove_title!(body),
-      excerpt: excerpt_article(body)
+      title: title(content),
+      body: body(content),
+      excerpt: excerpt(content)
     }
-  end
-
-  def parsed_articles
-    articles.map { | article | parse_article(article) }
   end
 
   private
 
-  def fetch_article_paths
+  def article_paths
     Dir.entries(ARTICLES_DIRECTORY)
   end
 
-  def convert_paths_to_articles(paths)
+  def articles_from(paths)
     strip_directories!(paths)
+
     paths.map do | path |
       {
-        file_title: remove_filetype(path),
+        file_title: filename_without_extension(path),
         filename: path,
         body: File.open("#{ARTICLES_DIRECTORY}/#{path}").read
       }
@@ -47,43 +48,38 @@ module ArticlesHelper
     paths.delete_if { | path | [".", ".."].include? path }
   end
 
-  # --- TODO - make these a separate class ---
-  def extract_title(article_content)
-    # Matches the 1-index of the MatchData object, which is
-    # the title
-    article_content.match('<h1>([^<>]*)</h1>')[1]
-  end
-
-  def remove_title!(article_content)
-    # We want to remove the whole thing, so slice the 0-index
-    # of the MatchData object
-    article_content.slice!(article_content.match('<h1>([^<>]*)</h1>')[0])
-    article_content
-  end
-
-  def excerpt_article(article_content)
-    recited_content = bracket_citations(article_content)
-    sanitized_content = Sanitize.fragment(recited_content)
-    first_two_sentences = get_first_two_sentences(sanitized_content)
-    tidy_content(first_two_sentences)
-  end
-  # --- END separate class ---
-
-  def remove_filetype(filename)
+  def filename_without_extension(filename)
     File.basename(filename, File.extname(filename))
   end
 
-  def get_first_two_sentences(content)
-    recited_content = bracket_citations(content)
-    sentences_arr = recited_content.split(".")[0..1].map { | sentence | "#{sentence}." }
-    sentences_arr.join
+  # --- TODO - make these a separate class ---
+  def title(content)
+    content.match('<h1>([^<>]*)</h1>')[1]
   end
 
-  def tidy_content(content)
+  def body(content)
+    content.slice!(content.match('<h1>([^<>]*)</h1>')[0])
+    content
+  end
+
+  def excerpt(content)
+    trimmed(first_line_of(sanitized(citations_parenthesised(content))))
+  end
+  # --- END separate class ---
+
+  def trimmed(content)
     content.delete("\n").strip
   end
 
-  def bracket_citations(content)
+  def first_line_of(content)
+    content.match(/([a-z|A-Z].+)\n/)[0]
+  end
+
+  def sanitized(content)
+    Sanitize.fragment(content)
+  end
+
+  def citations_parenthesised(content)
     content.gsub("\<cite\>", "(").gsub("\<\/cite\>", ")")
   end
 end
