@@ -1,0 +1,554 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Sam Morgan's Blog</title>
+
+    <!-- Use Typekit fonts -->
+    <script src="//use.typekit.net/dmj2ums.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <link href="/stylesheets/screen.css" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+  </head>
+
+  <body class="posts posts_486_the_simplest_thing posts_486_the_simplest_thing_index">
+    <main class="main">
+      <h1 id="whats-the-simplest-thing">What’s the ‘simplest thing?’</h1>
+
+<p>The conventional wisdom when doing programming is to start with the ‘simplest thing’. But what is the ‘simplest thing’? How do you know something is ‘simple’? And are there different ‘simple things’ that work better with different approaches?</p>
+
+<p>I see four main candidates for the ‘simplest thing’:</p>
+
+<ul>
+  <li>interactions,</li>
+  <li>rules,</li>
+  <li>components, and</li>
+  <li>chunks.</li>
+</ul>
+
+<p><em>The simplest interaction</em> involves building one small interaction with one object: one whose interface you have designed. <em>The simplest rule</em> involves identifying some constraint on the system and building that. <em>The simplest component</em> involves building the smallest, most atomic part of the system. <em>The simplest chunk</em> involves identifying one large-ish object in the program, building it, and breaking it down into smaller objects.</p>
+
+<p>Using the <a href="https://github.com/lauraweston/bank-tech-test">Bank Tech Test</a>, here are four different first steps you could take.</p>
+
+<h3 id="the-simplest-interaction">The simplest interaction.</h3>
+
+<p>The <em>simplest interaction</em> is my favourite first building block: a <a href="http://ruby-for-beginners.rubymonstas.org/writing_classes/state_and_behaviour.html">behavioural one</a>. An interaction is an atomic transaction with a program object. For instance: ‘an Account can store money’.</p>
+
+<ul>
+  <li>First, build the interaction as simply as possible.</li>
+  <li>Then, look at the next interaction in the system, for example ‘an Account can withdraw money’.</li>
+</ul>
+
+<p>One benefit to this approach is that it allows us to think about a high-level interface first. We can start by writing a test for the code we wish worked:</p>
+
+<pre>
+  <code>
+  # An account can store money
+  my_barclays_account = Account.new
+  my_barclays_account.store(10) # =&gt; 10
+  my_barclays_account.store(10) # =&gt; 20
+  </code>
+</pre>
+
+<p>Then we can make it work.</p>
+
+<pre>
+  <code>
+  class Account
+    def initialize
+      @balance = 0
+    end
+
+    def store(amount)
+      @balance += amount
+    end
+  end
+  </code>
+</pre>
+
+<p>Because we're starting with an interface, starting from the simplest interaction is amenable to <a href="https://dannorth.net/introducing-bdd/">outside-in TDD</a>. This means we can use an integration test to build out the Account interface:</p>
+
+<pre>
+  <code>
+  RSpec.describe 'Interacting with an Account' do
+    describe '#store' do
+      it 'stores money' do
+        my_barclays_account = Account.new
+
+        my_barclays_account.store(10)
+
+        expect(my_barclays_account.store(10)).to eq 20
+      end
+    end
+  end
+  </code>
+</pre>
+
+<p>(At the moment, we've only got one class: the Account. But later, Account might rely on other things. This integration test will grow to test the Account interface without mocking anything else.)</p>
+
+<p>Repeated application of <em>the simplest interaction</em> will start to produce <em>the simplest chunk</em> (see the last section). When this starts to happen – that is, when you notice your class contains too many responsibilities – do the following:</p>
+
+<ul>
+  <li><em>Extract method</em>, then (possibly)</li>
+  <li><em>Extract class</em>.</li>
+</ul>
+
+<p>That way repeatedly applying <em>the simplest interaction</em> builds towards a complete program manageably.</p>
+
+<h3 id="the-simplest-rule">The simplest rule.</h3>
+
+<p>The <em>simplest rule</em> is another behavioural building block. A rule is something that is necessarily true about a system. For example: ‘an Account cannot be negative’. Another example: ‘an Account cannot store a negative amount’.</p>
+
+<ul>
+  <li>Build the rule as simply as possible.</li>
+  <li>Then look at another one.</li>
+</ul>
+
+<blockquote>
+  <p>A rule is sometimes quite complicated to implement, and fulfilling it may involve many objects. Therefore, it's best to build the rule similarly to building a chunk (see the next section): as a bloated glob with multiple responsibilities. Then, use refactoring techniques to break it down.</p>
+</blockquote>
+
+<p>Starting with the simplest rule involves both thinking about the interface at a high level <em>and</em> the objects involved, therefore it's amenable to both inside-out and outside-in TDD.</p>
+
+<pre>
+  <code>
+  # An account cannot be negative
+  my_barclays_account = Account.new
+  my_barclays_account.withdraw(10) # =&gt; Error: account cannot be negative
+  </code>
+</pre>
+
+<p>We can build the rule quite simply, to start:</p>
+
+<pre>
+  <code>
+  class Account
+    def initialize
+      @balance = 0
+    end
+
+    def withdraw(amount)
+      raise 'Error: account cannot be negative'
+    end
+  end
+  </code>
+</pre>
+
+<p>We can then look at another rule:</p>
+
+<pre>
+  <code>
+  class Account
+    def initialize
+      @balance = 0
+    end
+
+    def store(amount)
+      raise 'Error: cannot store a negative amount'
+    end
+
+    def withdraw(amount)
+      raise 'Error: account cannot be negative'
+    end
+  end
+  </code>
+</pre>
+
+<p>In both of these examples, we've ended up programming away from the <a href="https://en.wikipedia.org/wiki/Happy_path">happy path</a>, but we could have selected rules that kept us to it (for example, 'the balance is the sum of all transactions').</p>
+
+<h3 id="the-simplest-component">The simplest component.</h3>
+
+<p>The <em>simplest component</em> is a more advanced technique. In it, you start by fully-defining the most atomic building block of a system. For example: a quantity, a currency, or a transaction.</p>
+
+<ul>
+  <li>First, build it.</li>
+  <li>Then, extend it so it can work with other instances of itself.</li>
+  <li>Then, build the rest of the system using it: build up interaction from there.</li>
+</ul>
+
+<p>Building the simplest component is amenable to <a href="https://8thlight.com/blog/georgina-mcfadyen/2016/06/27/inside-out-tdd-vs-outside-in.html">inside-out TDD</a>. It works well with a <a href="http://codemanship.co.uk/parlezuml/blog/?postid=970">Chicago approach to TDD</a>.</p>
+
+<blockquote>
+  <p>A powerful example of this approach is using the <a href="https://github.com/bhuga/quantity/blob/master/lib/quantity/unit.rb">quantity pattern</a>.</p>
+</blockquote>
+
+<pre>
+  <code>
+  # Understands the presentation of a transaction
+  class Transaction
+    include Comparable
+
+    def initialize(amount)
+      @amount = amount
+    end
+
+    def +(other)
+      @amount + other.amount
+    end
+
+    def -(other)
+      raise 'Cannot have negative money' if other &gt; self
+      @amount - other.amount
+    end
+
+    def &lt;=&gt;(other)
+      @amount &lt;=&gt; other.amount
+    end
+
+    def credit?
+      @amount.positive?
+    end
+
+    def debit?
+      @amount.negative?
+    end
+
+    protected
+
+    attr_reader :amount
+  end
+  </code>
+</pre>
+
+<p>Now that we have a thorough <code>Transaction</code> object, we can easily work with a variety of different kinds of transaction.</p>
+
+<pre>
+  <code>
+  cinema_tickets = Transaction.new(14)
+  diet_coke      = Transaction.new(1.65)
+
+  balance = cinema_tickets + diet_coke # =&gt; 15.65
+  cinema_tickets &gt; diet_coke # =&gt; true
+  diet_coke - cinema_tickets # =&gt; 'Cannot have negative money'
+  </code>
+</pre>
+
+<p>From here, we can build outwards: perhaps we'd look for something to house the transactions, or something to do calculations with them.</p>
+
+<p>I generally recommend <strong>against</strong> <em>the simplest component</em> unless you have a very solid understanding of the problem domain. It therefore works very well when used with <a href="https://www.infoq.com/news/2012/02/programmer-anarchy">programmer anarchy</a>, a post-Agile philosophy developed by <a href="https://github.com/fredgeorge">Fred George</a>.</p>
+
+<h3 id="the-simplest-chunk">The simplest chunk.</h3>
+
+<p>The <em>simplest chunk</em> combines state and behaviour in a building block. For example: ‘an Account’. It's my least preferred first step, because it's too easy to accidentally build a whole program, then wind up with a painful and tedious refactor (which we'll do now). I really only advise starting with the <em>simplest chunk</em> when <a href="http://www.extremeprogramming.org/rules/spike.html">spiking</a> part of a system.</p>
+
+<ul>
+  <li>Build the chunk in as much detail makes sense.</li>
+  <li>Then extract functionality using refactoring techniques – mostly <a href="https://refactoring.guru/extract-method"><em>extract method</em></a> followed by <a href="https://refactoring.guru/extract-class"><em>extract class</em></a> – to build out collaborator objects.</li>
+</ul>
+
+<p>Starting with the simplest chunk involves</p>
+
+<ul>
+  <li>thinking about multiple parts of the interface at a high level,</li>
+  <li>building an object that meets that interface,</li>
+  <li>extracting collaborator objects from excess responsibilities in the object you built.</li>
+</ul>
+
+<p>Therefore, it's amenable to both inside-out and outside-in TDD (so long as the chunk is small). It works especially well with a <a href="https://martinfowler.com/articles/mocksArentStubs.html">mockist</a> approach to TDD. I'm going to take deliberately large steps, so I won't be using TDD as I go. I rarely use TDD if I'm spiking: as it's exploratory code I'm going to throw away.</p>
+
+<p>Let's start by spiking the sort of object that an Account could be. It should:</p>
+
+<ul>
+  <li>add and withdraw money,</li>
+  <li>give us a statement, and</li>
+  <li>raise some errors when the user tries to do the sorts of things an Account shouldn't do.</li>
+</ul>
+
+<p>As we go, we can make interesting decisions, and refer to the spec for each one. For example: should we accept a starting balance? After withdrawing do we return the balance, the date-stamped withdrawal transaction, or just the withdrawn amount? Answering these questions with the spike with help us to move more swiftly later on.</p>
+
+<p>We'd like to be able to use the Account like this:</p>
+
+<pre>
+  <code>
+  require 'account'
+
+  account = Account.new
+  account.store(10)
+  account.store(20)
+  account.withdraw(14)
+
+  # should give an error
+  account.store(-10) 
+
+  # should give an error
+  account.withdraw(100)
+
+  # should print a statement 
+  # (without the erroneous transactions)
+  account.statement
+  </code>
+</pre>
+
+<p>Sticking this code in a script gives us a kind of integration test we can run to catch errors as we build out the Account functionality. We'll keep the Account interface the same as we go: so this 'test' shouldn't need to change.</p>
+
+<p>We can use the <em>simplest chunk</em> approach to understand the ultimate structure of the system. For instance, it's apparent early on that we need Accounts to store date-stamped transactions: not just a simple <code>@balance</code> integer.</p>
+
+<pre>
+  <code>
+  class Account
+    # The spec doesn't talk about starting balances,
+    # so no starting transactions when creating an account
+    def initialize
+      @transactions = []
+    end
+
+    def store(amount)
+      raise 'No storing negative money!' if amount &lt; 0
+      @transactions.push([amount, Time.now])
+
+      # storing should probably give us the stored amount?
+      amount
+    end
+
+    def withdraw(amount)
+      raise 'Not enough money!' if amount &gt; @transactions.map { |transaction| transaction[0] }.reduce(:+)
+      @transactions.push([-amount, Time.now])
+
+      # withdrawing should probably give us the withdrawn amount?
+      amount
+    end
+
+    def statement
+      print "date || credit || debit || balance\n"
+      @transactions.inject(0) do |running_balance, transaction|
+        running_balance += transaction[0]
+        print "#{ transaction[1] }  || #{ transaction[0] if transaction[0].positive? } || #{ transaction[0] if transaction[0].negative? } || #{ running_balance }\n"
+        running_balance
+      end
+    end
+  end
+  </code>
+</pre>
+
+<p>Now that we meet the integration spec, we can use <em>extract method</em> on this spike to start investigating what responsibilities are hiding inside <code>Account</code>:</p>
+
+<pre>
+  <code>
+  class Account
+    def initialize
+      @transactions = []
+    end
+
+    def store(amount)
+      raise 'No storing negative money!' if amount &lt; 0
+      @transactions.push(transaction(amount))
+      amount
+    end
+
+    def withdraw(amount)
+      raise 'Not enough money!' if amount &gt; running_balance
+      @transactions.push(transaction(-amount))
+      amount
+    end
+
+    def statement
+      print_header
+      print_transactions
+    end
+
+    private
+
+    def transaction(amount)
+      [amount, Time.now]
+    end
+
+    def running_balance(transactions = @transactions)
+      transactions.map { |transaction| transaction[0] }.reduce(:+)
+    end
+
+    def print_header
+      print "date || credit || debit || balance\n"
+    end
+
+    def print_transactions
+      @transactions.each { |transaction| print_transaction(transaction) }
+    end
+
+    def print_transaction(transaction)
+      print "#{ transaction[1] }  || #{ transaction[0] if transaction[0].positive? } || #{ transaction[0] if transaction[0].negative? } || #{ running_balance(transactions_up_to(transaction)) }\n"
+    end
+
+    def transactions_up_to(transaction)
+      @transactions.slice_after(transaction).to_a[0]
+    end
+  end
+  </code>
+</pre>
+
+<p>Using <em>extract method</em> exposed four extra sets of responsibilities, which now lurk in the private methods of <code>Account</code>:</p>
+
+<ul>
+  <li>making Transactions, which bundle together amounts and times</li>
+  <li>printing Transactions in some kind of statement</li>
+  <li>managing and querying Transactions</li>
+  <li>calculating the balance of a set of Transactions</li>
+</ul>
+
+<p>That last responsibility could belong to the same object that manages and queries Transactions: we don't know yet. We should use <em>extract class</em> on each responsibility, checking as we go. We can come up with some names for objects that could be responsible for each of the above:</p>
+
+<ul>
+  <li><em>a Transaction object</em> understands making Transactions, which bundle together amounts and times</li>
+  <li><em>a Statement object</em> understands printing Transactions in some kind of statement</li>
+  <li><em>a Transactions object</em> understands managing and querying Transactions</li>
+  <li><em>a Balance object</em> (or maybe <em>a Transactions object</em>) understands calculating the balance of a set of Transactions</li>
+</ul>
+
+<p>Let's use <em>extract class</em> a few times:</p>
+
+<pre>
+  <code>
+  # Understands the presentation of a single transaction
+  class Transaction
+    attr_reader :amount
+
+    def initialize(amount)
+      @amount = amount
+      @time   = Time.now
+    end
+
+    def debit?
+      @amount &lt; 0
+    end
+
+    def credit?
+      @amount &gt;= 0
+    end
+
+    def time
+      @time.strftime("%d/%m/%Y")
+    end
+  end
+
+  # Understands the calculation of the sum of transaction amounts
+  class Balance
+    def self.of(transactions)
+      transactions.map(&amp;:amount).reduce(:+)
+    end
+  end
+
+  # Understands the management and querying of transactions
+  class Transactions
+    include Enumerable
+
+    def initialize
+      @state = []
+    end
+
+    def each(&amp;block)
+      @state.each(&amp;block)
+    end
+
+    def store(amount)
+      @state.push(Transaction.new(amount))
+      amount
+    end
+
+    def withdraw(amount)
+      @state.push(Transaction.new(-amount))
+      amount
+    end
+
+    def up_to(transaction)
+      @state.slice_after(transaction).to_a[0]
+    end
+  end
+
+  # Understands the presentation of statements
+  class Statement
+    HEADER = "date || credit || debit || balance\n".freeze
+
+    def initialize(transactions)
+      @transactions = transactions
+    end
+
+    def self.with(transactions)
+      new(transactions).to_s
+    end
+
+    def to_s
+      print HEADER
+      print transactions
+    end
+
+    private
+
+    def transactions
+      @transactions.inject("") do |output, transaction| 
+        output &lt;&lt; " #{ transaction.time }  ||" 
+        output &lt;&lt; " #{ transaction.amount if transaction.credit? } ||"
+        output &lt;&lt; " #{ transaction.amount if transaction.debit? } ||" 
+        output &lt;&lt; " #{ Balance.of(@transactions.up_to(transaction)) }\n"
+      end
+    end
+  end
+
+  # Understands the filtering of appropriate activity
+  class Account
+    def initialize
+      @transactions = Transactions.new
+    end
+
+    def store(amount)
+      raise 'No storing negative money!' if amount &lt; 0
+      @transactions.store(amount)
+    end
+
+    def withdraw(amount)
+      raise 'Not enough money!' if amount &gt; Balance.of(@transactions)
+      @transactions.withdraw(amount)
+    end
+
+    def statement
+      Statement.with(@transactions)
+    end
+  end
+  </code>
+</pre>
+
+<p>I advise <strong>against</strong> picking <em>the simplest chunk</em>: it's too easy to get caught up in doing too much. People often accidentally build <em>the simplest chunk</em> when what they wanted to build was the <em>simplest interaction</em>. A good way to avoid that is to use a rigid 15-minute timebox. If you run over and you're not done (implementation and refactoring), start again with a smaller, simpler interaction.</p>
+
+<p>On the other hand, doing this spike has opened me to the possibility of the existence of services, a statement object, the Account-as-a-filter, and so on. These are all valuable insights for design decisions I might take as a I move in a more step-by-step manner.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>There are four different ways to define the 'simplest thing':</p>
+
+<ul>
+  <li>interactions,</li>
+  <li>rules,</li>
+  <li>components, and</li>
+  <li>chunks.</li>
+</ul>
+
+<p><em>The simplest interaction</em> involves building one small interaction with one object: one whose interface you have designed. <em>The simplest rule</em> involves identifying some constraint on the system and building that. <em>The simplest component</em> involves building the smallest, most atomic part of the system. <em>The simplest chunk</em> involves identifying one large-ish object in the program, building it, and breaking it down into smaller objects.</p>
+
+<p>Mostly, my 'simplest step' starts with <em>the simplest interaction</em>. After a while, lots of simple interactions lead to an object that looks a bit like <em>the simplest chunk</em>: but at that point it's manageable to <em>extract method</em> and then <em>extract class</em>.</p>
+
+<p>One thing to avoid is prematurely building out new <em>simplest chunks</em> halfway through building something else. Avoid introducing new objects until <em>extract method</em> and <em>extract class</em> tell you to, or until some deliberate new design step has begun. A good way to hold yourself to this is to use 15-minute design cycles.</p>
+
+    </main>
+    
+    <!-- highlight syntax -->
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-64373478-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

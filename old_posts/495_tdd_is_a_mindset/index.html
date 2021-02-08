@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Sam Morgan's Blog</title>
+
+    <!-- Use Typekit fonts -->
+    <script src="//use.typekit.net/dmj2ums.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <link href="/stylesheets/screen.css" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+  </head>
+
+  <body class="old_posts old_posts_495_tdd_is_a_mindset old_posts_495_tdd_is_a_mindset_index">
+    <main class="main">
+      <h1 id="tdd-is-a-mindset">TDD is a mindset</h1>
+
+<p>Something I'm very keen on telling students is that Test-Driven Development is not just about initializing RSpec and making sure you've got great coverage. TDD is a mindset that should guide how you articulate and communicate problem spaces, without jumping to solutions too fast.</p>
+
+<h3 id="the-problem-space">The Problem Space</h3>
+
+<p>At <a href="http://www.makersacademy.com">Makers Academy</a>, students start out with simple(ish) problems. In the first week, they build a simplified version of a well-known London transport system. In the next, they work with a two-player board game. Aside from keeping the moving parts down, the simplicity of these projects helps to keep the <em>problem space</em> nice and narrow.</p>
+
+<p>I'm going to assume that you're comfortable with the term <em>Domain</em> and its programming associate, the <em>Domain Model</em>. In my opinion, a Domain Model is separate to the problem space surrounding that model - although clarifying one inevitably results in more clarity in the other.</p>
+
+<p>A domain model is a static entity (at least for the duration of a sprint). By that, I don't mean that it can be mapped in its entirety before work begins – rather, I mean that it exists, somehow, and <em>emerges</em> from the process of development. A domain model is fixed but obscured: agile development practices gradually pull back that shroud until a clearer view is reached.</p>
+
+<p>A problem space is not fixed. It's a fluid construct that exists only while discussed, and refers to the immediate concerns surrounding the domain model. You could consider it to <em>be</em> the shroud which is pulled away - only clear in retrospect, and likely very different depending on the solution practices used by the development team. It is ephemeral, where the domain model is enduring. Problem spaces are immortalised only in a git commit history, domain models are immortalised in code.</p>
+
+<p>Why is this important? Because development teams tend to focus on clarifying the domain as a matter of priority. I propose that recalibrating to focus on the immediate problem space encourages developers to allow the domain model to emerge, without having to force code along preconceived lines. Also, the problem space is a shallow one - it's a space that can be discussed rapidly and purposefully by engaged stakeholders. Finally, thinking in terms of the immediate problem space, rather than the domain as a whole, forces developers into a more methodical mindset - one that is perfectly complemented by best-practices in communication, pair experimentation, and TDD.</p>
+
+<p>Does the concept of a problem space add anything? If the domain model is the result, and the problem space is the route taken, could the 'problem space' not simply consist of a series of tickets? Well, yes - but we have lacked an appropriate concept for this (beyond 'Sprint Focus'). Nailing down what a problem space <em>is</em> allows developers to communicate sensibly around a single entity in a methodical manner. Rather than racing through the testing phase to implement code that represents a hastily-assembled domain model, seeing the problem space as primary encourages developers to see the testing phase as the primary communicative means for solving a problem.</p>
+
+<h3 id="sotdd">So…TDD?</h3>
+
+<p>OK, so back to TDD. Where does it fit in all this? Even the most evangelistic Test-Driven Developer, when pressed to explain their methods, will fall back on 'well-tested code delivers a stable end product'. And this is true: but it's very hard to inculcate in juniors. Juniors don't have the horrific experience of refactoring a poorly-tested system: their tanks of midnight oil remain full, untouched by panicked war-room sessions. What they can be taught, though, is that testing is a mindset: a communication mechanism for discussing a problem before committing to a course of action that defines a domain model.</p>
+
+<p>For more experienced developers, this could be seen as a call-to-arms for TDD. Even the best-constructed domain model is a fragile structure, prone to changes in management, leadership, market forces, development constraints, and so on. Attacking the problem space too fast - failing to discuss the exact nature of the problem through tests - pulls the sheet from off this structure with a speed that risks collapsing the entire thing.</p>
+
+<p>So, TDD is a mindset. It's not something that exists just at the 'testing phase' - it's a communication tool for kicking off a project, for kicking off a sprint. It's a tool for discussion when readying the implementation of a feature. It's a tool for embedded QA to ensure that every team member is on the same page during a project. Critically, it's a tool for non-developers to understand the kind of structure that is emerging from the requirements they set out, and deciding whether their requirements are being defined appropriately - all well in advance of final delivery.</p>
+
+    </main>
+    
+    <!-- highlight syntax -->
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-64373478-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

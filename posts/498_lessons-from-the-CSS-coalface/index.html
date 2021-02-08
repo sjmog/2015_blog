@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Sam Morgan's Blog</title>
+
+    <!-- Use Typekit fonts -->
+    <script src="//use.typekit.net/dmj2ums.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <link href="/stylesheets/screen.css" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+  </head>
+
+  <body class="posts posts_498_lessons-from-the-CSS-coalface posts_498_lessons-from-the-CSS-coalface_index">
+    <main class="main">
+      <h1 id="lessons-from-the-css-coalface">Lessons from the CSS coalface</h1>
+
+<p>CSS can be really hard: it's not naturally object-oriented, and it's built for a bygone era of type-only websites. Here are some tips (from a talk I gave at Makers Academy in London) to help intermediate front-end developers avoid spaghetti-ing their CSS on larger projects.</p>
+
+<h3 id="why-is-css-easy">Why is CSS easy?</h3>
+
+<ul>
+  <li>It's got a simple structure. <code>selector { attribute: value; }</code>: easy.</li>
+  <li>There are only a handful of selectors.</li>
+  <li>There are lots of properties, but the conceptual barrier to using them is low (they're innately visual).</li>
+</ul>
+
+<p>From a traditional development standpoint, CSS is an easy thing to get going with. The syntax is trivially accessible, and there's very little variety in application. But these are all reasons for why CSS also falls on its face so often.</p>
+
+<h3 id="why-is-css-hard">Why is CSS hard?</h3>
+
+<ul>
+  <li>It's got a low conceptual barrier to entry. This makes large-scale CSS <em>too easy</em> to mess up, because it encourages thoughtlessness and verbosity. It doesn't encourage 'best practices'.</li>
+  <li>It's informal: the concrete specifications are running way behind browser adoption. CSS lives or dies by trial-by-adoption in browsers, and there's not always rhyme or reason to which properties make it and which don't.</li>
+  <li>It's not amenable to Object-Oriented Design, mostly because of issues surrounding globality - where styles leak into other styles - and poorly-planned inheritance (which is integral to the 'cascading' nature of CSS).</li>
+  <li>There's no coherent overview of the current state of CSS. Testing is hard, because browsers are many, and there's no real 'right way'. Sites like <a href="http://caniuse.com">CanIUse</a> exist solely to help developers make some sense of this mess.</li>
+</ul>
+
+<p>CSS' 'easy' points are also its hardest. Because everything is so unstructured - unlike, say, a class-based language such as Ruby, or a prototypal one like JavaScript - <strong>the entire onus of structuring your CSS is on you</strong>. Great CSS programmers find themselves 'inventing' abstractions, which may seem to be adding complexity - but in fact, they're keeping things simpler in the long run.</p>
+
+<h3 id="tips-for-keeping-your-css-in-shape">Tips for keeping your CSS in shape</h3>
+
+<ol>
+  <li>Let your class structure dictate your CSS structure. Use Class Selectors.</li>
+  <li>Component-ize things.</li>
+  <li>Avoid deep selector chains.</li>
+  <li>Know the box model and z-index context stacking inside out.</li>
+  <li>Work cross-browser.</li>
+</ol>
+
+<h3 id="let-your-class-structure-dictate-your-css-structure">1. Let your class structure dictate your CSS structure</h3>
+
+<p>There are a few kinds of structure within a stock HTML page. The first is the <strong>semantic structure</strong>, which indicates the broad-brush division of information on the page.</p>
+
+<p>To visualise semantic structure, imagine the contents of a page as a kind of sludge. The user's progress through the page is a gradual progression through that sludge. Semantic structure indicates the kind of path a user might want to take to efficiently route through that sludge. So <code>&lt;main&gt;</code> is a semantic element that contains the richest, most vital sludge. <code>&lt;aside&gt;</code> contains an alternate route through the sludge - less direct, but sludge the user may wish to explore. Semantic elements divide up the information sludge, providing pointers for different routes through it.</p>
+
+<p>In my opinion, you should not be styling these pointers directly. They are broad brushes, dividing up the informational content of a page in a way that is primarily appreciable by browsers. You should instead put classes on semantic elements, and target those classes. Sure, this inflates the size of your HTML, but that's HTML's fault: it's designed for both machines and people, so it doesn't do either particularly well.</p>
+
+<p>This is why I prefer to organise my CSS around a <strong>class structure</strong>. It's distinct from the DOM tree, and deals with specific, more relevant, ways of <em>presenting</em> information: not the information itself. It cascades in a sensible way, so your CSS files are easier to read, understand, and extend. A selector like <code>.title &gt; .title__number</code> makes more sense than something like <code>h1 &gt; span</code>. As an extra bonus, picking only one kind of selector helps keep weird Specificity issues to a minimum.</p>
+
+<h3 id="component-ize-things">2. Component-ize things</h3>
+
+<p>Large programs hugely benefit from an Object-Oriented approach. Rather than representing a program as a list of commands, object-oriented programs are best visualised as a group of weakly-interacting objects, each encapsulating their own behaviour and state, communicating with one another well-directed messages. Some languages, like Ruby, were built to work that way. CSS was not.</p>
+
+<p>An object-oriented approach can drastically simplify CSS, even from an early stage. Seeing fragments of HTML as components is not new, but encapsulating their styling within a specific class structure is a recent convention. OOCSS, SMACSS, and BEM are all approaches to keeping CSS local to individual HTML fragments. They are specifically designed to avoid scope issues and poorly-planned inheritance problems.</p>
+
+<p>There is a tradeoff between HTML class verbosity and CSS complexity. The less verbose your HTML class structure, the more obscure the CSS targetting that HTML becomes. Here's an example of that using BEM styles:</p>
+
+<pre>
+<code>
+<!-- non-verbose class structure: simple HTML -->
+&lt;header&gt;
+  &lt;h1&gt;
+    We have &lt;span&gt;14&lt;/span&gt; different lizards in our house
+  &lt;/h1&gt;
+&lt;/header&gt;
+</code>
+</pre>
+
+<p>CSS to style the above:</p>
+
+<pre>
+<code>
+/* non-verbose class structure: complex CSS */
+header {
+  height: 12vh;
+  background-color: #f0f0f0;
+}
+
+header h1 {
+  font-size: 1.8em;
+  color: #777;
+}
+/* what is this? */
+header h1 span {
+  color: #ff2424;
+}
+</code>
+</pre>
+
+<p>Here's the same code, using a BEM structure:</p>
+
+<pre>
+<code>
+<!-- BEM class structure: more verbose HTML -->
+&lt;header class="title-block"&gt;
+  &lt;h1 class="title title-block__title"&gt;
+    We have &lt;span class="numbers title__numbers"&gt;14&lt;/span&gt; different lizards in our house
+  &lt;/h1&gt;
+&lt;/header&gt;
+</code>
+</pre>
+
+<p>CSS to style the above:</p>
+
+<pre>
+<code>
+/* BEM class structure: more legible, extensible CSS */
+.title-block {
+  height: 12vh;
+  background-color: #f0f0f0;
+}
+
+.title-block__title {
+  font-size: 1.8em;
+  color: #777;
+}
+/* I know exactly what this is */
+.title__numbers {
+  color: #ff2424;
+}
+</code>
+</pre>
+
+<p>As you can see, the BEM class structure increases HTML verbosity, but drastically decreases CSS complexity. If you're a frontend engineer, you'd rather deal with complex HTML than intractable CSS all day long.</p>
+
+<h3 id="avoid-deep-selector-chains">Avoid deep selector chains</h3>
+
+<pre>
+<code>
+header &gt; h1 &gt; span &gt; i:last-child:after { 
+  /* what even am I styling? */
+}
+</code>
+</pre>
+
+<p>Deep selector chains are another enemy of maintainable, extensible CSS. Aside from introducing horrible CSS specificity issues - "Why is this centering? I just told this to text-align left" - they make it extremely hard for future developers to adjust styles rapidly. More often than not, they'll just shove another line of CSS on the bottom of <code>styles.css</code> and boom, you're pushing an unnecessary 18 bytes over the wire to every visitor.</p>
+
+<p>Specificity issues are resolvable <em>once</em> by using <code>!important</code>. Keep that in the bag for seriously vital global styles. If you find yourself needing to use <code>!important</code>, resolve the specificity issue by adding more classes to your HTML. It might seem mad, but the next frustrated developer who can now resolve a global issue with an <code>!important</code> will thank you for putting in the time.</p>
+
+<h3 id="know-the-box-model-and-z-index">Know the Box Model and z-index</h3>
+
+<p>The CSS Box Model is pretty simple to grasp: everything is a box, and everything is typographic. Every layout issue you've ever faced can be solved by a <a href="https://css-tricks.com/the-css-box-model/">decent understanding</a> of those two facts.</p>
+
+<p>z-index is a different beast: 'context stacking' is the enemy of many a developer. My advice? Use z-index <a href="http://philipwalton.com/articles/what-no-one-told-you-about-z-index/">super-sparingly</a>, and only where you <em>absolutely cannot</em> solve the issue with a deeper understanding of the box model.</p>
+
+<p>Oh, and use <code>outline</code> in development. It neatly outlines all the boxes to which you attach the style, without the potential headaches of using <code>border</code>.</p>
+
+<h3 id="work-cross-browser">Work cross-browser</h3>
+
+<p>Don't leave cross-browser testing for the end of development. Use <a href="http://caniuse.com">CanIUse</a> throughout your frontend development, and play with <a href="https://www.browserstack.com/automate">BrowserStack's selenium integration</a>. Plugins like <a href="http://leaverou.github.io/prefixfree/">PrefixFree</a> can help to reduce the overhead of constantly remembering browser prefixes. In my opinion, Flexbox is great but still too poorly-supported to be worth implementing. Vertical centering is still an art drawn from the ancient world of tabular HTML: triple-check compatibility when you decide on a solution.</p>
+
+<p><a href="http://www.browsersync.io/">BrowserSync</a> will synchronise your in-browser interactions across windows, devices, and locations. I have it permanently switched on, and aliased in my <code>bash_profile</code>.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>Those are they: my best tips for intermediate frontend developers looking to break into a senior role.</p>
+
+<p>At its heart, CSS is a poor fit for the modern web world. The driving committees behind it are in no position to take on private browser vendors. It's fragmented, unpleasant, and unfit for purpose. Therefore, good CSS requires that you constrain yourself: adding abstraction (which may be perceived as 'complexity') in order to save yourself - and your team - major headaches later on.</p>
+
+    </main>
+    
+    <!-- highlight syntax -->
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-64373478-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

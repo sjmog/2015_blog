@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Sam Morgan's Blog</title>
+
+    <!-- Use Typekit fonts -->
+    <script src="//use.typekit.net/dmj2ums.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <link href="/stylesheets/screen.css" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+  </head>
+
+  <body class="old_posts old_posts_496_testing-html old_posts_496_testing-html_index">
+    <main class="main">
+      <h1 id="testing-html">Testing HTML</h1>
+
+<p>There's no clear route as to how to provide testing hooks in your HTML. Here are my three suggestions for how to mark up HTML for easy testability, in the absence of a component-based framework.</p>
+
+<p>From an HTML/CSS perspective, this is a <em>style guide</em> decision, rather than a 'best practices' one. This is the same for a lot of HTML/CSS stuff, because they were never built to be tested in this way.</p>
+
+<p>My personal style guide starts here.</p>
+
+<h3 id="approach-1-id">Approach 1: <code>id</code></h3>
+
+<ul>
+  <li>Add <code>id</code> attributes to HTML elements so JavaScript can hook on to them:</li>
+</ul>
+
+<pre>
+  <code>
+  &lt;div id="myThing"&gt;I'll show first.&lt;/div&gt;
+
+  &lt;script type="text/javascript"&gt;
+    var myThing = document.getElementById('myThing');
+    myThing.innerHTML = "I'll show now";
+  &lt;/script&gt;
+  </code>
+</pre>
+
+<p>By this logic, it's <strong>totally OK to use <code>id</code> attributes for JavaScript-led testing.</strong> Capybara doesn't use JavaScript to tell if elements are on a page, though, so <code>id</code> doesn't seem the right attribute to use.</p>
+
+<h3 id="approach-2-class">Approach 2: <code>class</code></h3>
+
+<ul>
+  <li>Add <code>class</code> attributes to HTML elements to tell what they are:</li>
+</ul>
+
+<pre>
+  <code>
+  &lt;div class="the_thing"&gt;I'll show first.&lt;/div&gt;
+
+  &lt;script type="text/javascript"&gt;
+    // getElementsByClassName returns an array containing the .the_thing element
+    var myThing = document.getElementsByClassName("the_thing")[0];
+    myThing.innerHTML = "I'll show now";
+  &lt;/script&gt;
+  </code>
+</pre>
+
+<p>By this logic, <strong><code>class</code> is the right attribute to use for non-JavaScript testing.</strong></p>
+
+<p>However, this approach to using classes relies on two assumptions:</p>
+
+<ul>
+  <li>We are using <a href="http://oocss.org/">Object-Oriented CSS</a>;</li>
+  <li>We are using class names to name HTML/CSS 'objects'.</li>
+</ul>
+
+<p>There is a third route, which seems messy but is potentially better.</p>
+
+<h3 id="approach-3-data--attribute">Approach 3: <code>data-</code> attribute</h3>
+
+<ul>
+  <li>Use a <code>data-testinghook</code> attribute like this:</li>
+</ul>
+
+<pre>
+<code>
+  &lt;div data-testinghook="myThing"&gt;I'll show first.&lt;/div&gt;
+
+  &lt;script type="text/javascript"&gt;
+    // querySelectorAll returns an array containing the element
+    var myThing = document.querySelectorAll('[data-testinghook="myThing"]')[0];
+    myThing.innerHTML = "I'll show now";
+  &lt;/script&gt;
+  </code>
+</pre>
+
+<p>That last one seems fairly messy, though, and it'll make your HTML look awful (which is actually not as bad as it sounds).</p>
+
+<h3 id="which-one-should-i-use">Which one should I use?</h3>
+
+<p>My 2 cents - use suggestion number 2. This ties neatly together with my philosophy of <a href="/posts/498_lessons-from-the-CSS-coalface/">using the class structure</a> to define a group of elements' purpose in CSS.</p>
+
+    </main>
+    
+    <!-- highlight syntax -->
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-64373478-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>
