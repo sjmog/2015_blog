@@ -38,7 +38,7 @@ require 'lib/articles_helper'
 # activate :automatic_image_sizes
 
 activate :deploy do |deploy|
-  deploy.deploy_method = :git
+  deploy.method = :git
   deploy.branch = 'master'
   deploy.build_before = true
 end

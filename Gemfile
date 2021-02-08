@@ -5,7 +5,7 @@ gem 'rake'
 
 gem "middleman", "~>3.3.12"
 gem 'opal'
-gem 'middleman-deploy', '~> 2.0.0.pre.alpha'
+gem 'middleman-deploy'
 
 gem 'redcarpet'
 gem 'github-markup'

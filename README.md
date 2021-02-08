@@ -10,7 +10,8 @@ Development should be done on the `source` branch.
 #### Adding an article
 
 1. Add the article to source/posts. Any `.md` is good, GitHub-flavour markdown.
-2. Run `middleman deploy`.
+2. Delete your `build` directory.
+3. Run `middleman deploy`.
 
 #### Running Compass
 
