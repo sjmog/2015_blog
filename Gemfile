@@ -3,7 +3,7 @@ ruby '2.6.3'
 
 gem 'rake'
 
-gem "middleman"
+gem "middleman", "~>3.3.12"
 gem 'opal'
 gem 'middleman-deploy', '~> 2.0.0.pre.alpha'
 
