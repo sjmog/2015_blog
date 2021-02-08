@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
-ruby '2.2.1'
+ruby '2.6.3'
 
 gem 'rake'
 
-gem "middleman", "~>3.3.12"
+gem "middleman"
 
 gem "middleman-deploy"
 
